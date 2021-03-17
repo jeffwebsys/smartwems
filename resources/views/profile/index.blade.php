@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@section('title','Pending Request')
+@section('title','My Profile')
 
 <div class="layout-px-spacing">                
                     
@@ -146,7 +146,7 @@
                                     </form>
                                 </div>
 
-                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                                {{-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                                     <form id="about" class="section about">
                                         <div class="info">
                                             <h5 class="">About</h5>
@@ -162,8 +162,8 @@ My job is to build your website so that it is functional and user-friendly but a
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-
+                                </div> --}}
+{{-- 
                                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                                     <form id="work-platforms" class="section work-platforms">
                                         <div class="info">
@@ -190,9 +190,9 @@ My job is to build your website so that it is functional and user-friendly but a
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
 
-                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                                {{-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                                     <form id="contact" class="section contact">
                                         <div class="info">
                                             <h5 class="">Contact</h5>
@@ -249,9 +249,9 @@ My job is to build your website so that it is functional and user-friendly but a
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
 
-                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                                {{-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                                     <form id="social" class="section social">
                                         <div class="info">
                                             <h5 class="">Social</h5>
@@ -303,9 +303,9 @@ My job is to build your website so that it is functional and user-friendly but a
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
 
-                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                                {{-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                                     <div id="skill" class="section skill">
                                         <div class="info">
                                             <h5 class="">Skills</h5>
@@ -357,9 +357,9 @@ My job is to build your website so that it is functional and user-friendly but a
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
-                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                                {{-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                                     <form id="edu-experience" class="section edu-experience">
                                         <div class="info">
                                             <h5 class="">Education</h5>
@@ -521,9 +521,9 @@ My job is to build your website so that it is functional and user-friendly but a
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
 
-                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                                     <form id="work-experience" class="section work-experience">
                                         <div class="info">
                                             <h5 class="">Work Experience</h5>
@@ -701,7 +701,7 @@ My job is to build your website so that it is functional and user-friendly but a
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> 
 
                             </div>
                         </div>
@@ -727,7 +727,7 @@ My job is to build your website so that it is functional and user-friendly but a
 @endsection
 @push('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/dropify/dropify.min.css') }}">
-    <link href="{{ asset('assets/css/users/account-setting.css') }}" rel="stylesheet" type="text/css" />  
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/users/account-setting.css') }}"/>  
 @endpush
 @push('scripts')
     <script src="{{ asset('plugins/dropify/dropify.min.js') }}"></script>
