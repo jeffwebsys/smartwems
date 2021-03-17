@@ -68,17 +68,18 @@
 						  <input type="text" class="form-control" id="property_no" name="property_no" value="" required>
 						  <br><label for="property_no">Acquisition Date</label>
 						  <input type="date" class="form-control" id="ac_date" name="ac_date" value="" required> 
-						   
-						   
-						</div>
-						<div class="col-md-6 mb-4 fw-900">
-							<label for="equipment_categories">Categories</label>
+                          <br>
+                          <label for="equipment_categories">Categories</label>
 							<select class="form-control" name="equipment_categories_id">
 								@foreach($equipment as $equipmentCat)
 								<option value="{{$equipmentCat->id}}">{{ $equipmentCat->title }}</option>
 								@endforeach
 							</select>
-							<br>
+							
+						   
+						   
+						</div>
+						<div class="col-md-6 mb-4 fw-900">
 							<label for="equipment_locations">Area Locations</label>
 							<select class="form-control" name="equipment_locations_id">
 								@foreach($locations as $location)
@@ -92,6 +93,11 @@
 						  <br><label for="remarks">Remarks</label>
 						  <input type="text" class="form-control" id="remarks" name="remarks" value="" required>
                           	<br>
+                          <label for="property_no">Last PM Date</label>
+						  <input type="date" class="form-control" id="last_pm" name="last_pm" value="" required>
+                          <br><label for="property_no">Next PM Date</label>
+						  <input type="date" class="form-control" id="next_pm" name="next_pm" value="" required>
+                          <br>
 							<label for="status">Status</label>
                             <select class="form-control" name="status">
 								<option value="0">Inactive</option>
@@ -145,18 +151,19 @@
 						  <input type="text" class="form-control" id="edit_property_no" name="property_no" value="" required>
 						  <br><label for="property_no">Acquisition Date</label>
 						  <input type="date" class="form-control" id="edit_ac_date" name="ac_date" value="" required>
-						   {{-- <br><label for="qr_code">QR Code</label> <br>
-						  <span id="qr_code"></span> --}}
-						   
-						</div>
-						<div class="col-md-6 mb-4  fw-900">
-							<label for="equipment_categories">Categories</label>
+                          <br>
+                          <label for="equipment_categories">Categories</label>
 							<select class="form-control" name="equipment_categories_id">
 								@foreach($equipment as $equipmentCat)
 								<option value="{{$equipmentCat->id}}">{{ $equipmentCat->title }}</option>
 								@endforeach
 							</select>
-							<br>
+							
+						   {{-- <br><label for="qr_code">QR Code</label> <br>
+						  <span id="qr_code"></span> --}}
+						   
+						</div>
+						<div class="col-md-6 mb-4  fw-900">
 							<label for="equipment_locations">Area Locations</label>
 							<select class="form-control" name="equipment_locations_id">
 								@foreach($locations as $location)
@@ -169,16 +176,18 @@
 						  <input type="text" class="form-control" id="edit_res_personnel" name="res_personnel" value="" required>
 						  <br><label for="remarks">Remarks</label>
 						  <input type="text" class="form-control" id="edit_remarks" name="remarks" value="" required>
+                           <br><label for="unit_cost">Last PM</label>
+						  <input type="date" class="form-control" id="edit_last_pm" name="last_pm" value="" required>
+						  <br><label for="unit_cost">Next PM</label>
+                          <br>
+						  <input type="date" class="form-control" id="edit_next_pm" name="next_pm" value="" required>
                           <br>
 							<label for="status">Status</label>
                             <select class="form-control" name="status">
 								<option value="0">Inactive</option>
                                 <option value="1">Active</option>
 							</select>
-						  {{-- <br><label for="unit_cost">Last PM</label>
-						  <input type="date" class="form-control" id="edit_last_pm" name="last_pm" value="" required>
-						  <br><label for="unit_cost">Next PM</label>
-						  <input type="date" class="form-control" id="edit_next_pm" name="next_pm" value="" required> --}}
+						 
 						</div>
 					</div>
 				  
@@ -247,8 +256,8 @@
             $("#edit_property_no").val(data.property_no);
             $("#edit_unit_cost").val(data.unit_cost);
             $("#edit_res_personnel").val(data.unit_cost);
-            // $("#edit_next_pm").val(data.next_pm);
-            // $("#edit_last_pm").val(data.last_pm);
+            $("#edit_next_pm").val(data.next_pm);
+            $("#edit_last_pm").val(data.last_pm);
             $("#edit_remarks").val(data.remarks);
             $("#editSave").val("edit-user");
             $("#equipmentDetail").modal("show");

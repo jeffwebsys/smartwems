@@ -96,13 +96,13 @@
             <li class="menu">
                 <a href="{{ route('maintenancestaff.pending') }}" {{ request()->routeIs('maintenancestaff.pending') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
                         <span>Pending SR</span>
                     </div>
                 </a>
             </li>
-            {{-- <li class="menu">
-                <a href="{{ route('staff.servicelist') }}" {{ request()->routeIs('staff.servicelist') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
+             <li class="menu">
+                <a href="{{ route('maintenancestaff.completed') }}" {{ request()->routeIs('maintenancestaff.completed') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                         <span>Completed SR</span>
@@ -110,25 +110,25 @@
                 </a>
             </li>
             <li class="menu">
-                <a href="{{ route('staff.servicelist') }}" {{ request()->routeIs('staff.servicelist') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ route('maintenancestaff.procurement') }}" {{ request()->routeIs('maintenancestaff.procurement') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                         <span>Procurement Requests</span>
                     </div>
                 </a>
             </li>
             <li class="menu">
-                <a href="{{ route('staff.servicelist') }}" {{ request()->routeIs('staff.servicelist') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ route('maintenancestaff.inventory') }}" {{ request()->routeIs('maintenancestaff.inventory') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
                         <span>View Equipment Inv</span>
                     </div>
                 </a>
-            </li> --}}
+            </li> 
               <!--  Staff -->
             @elseif(auth()->user()->user_type == 4)
             <li class="menu">
-                <a href="{{ route('staff.servicelist') }}" {{ request()->routeIs('staff.servicelist') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ route('maintenancestaff.pending') }}" {{ request()->routeIs('maintenancestaff.pending') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                         <span>Create SR</span>
@@ -218,7 +218,7 @@
             </li>
                 @endif
                 <li class="menu">
-                    <a href="{{ route('admin.account') }}" {{ request()->routeIs('admin.account') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
+                    <a href="{{ route('myprofile') }}" {{ request()->routeIs('myprofile') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <i data-feather="user"></i>
                             <span>My Profile</span>

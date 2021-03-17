@@ -45,7 +45,8 @@
             drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
 	    } );
     </script>
+    @stack('scripts')
     <script src="{{ asset('plugins/highlight/highlight.pack.js') }}"></script>
     <script src="{{ asset('assets/js/scrollspyNav.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    @stack('scripts')
+    

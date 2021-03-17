@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'ProfileController@myprofile')->name('myprofile');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 
@@ -74,6 +75,15 @@ Route::group(['prefix' => 'maintenancestaff', 'as' => 'maintenancestaff.', 'midd
 	Route::get('/pending/{id}/edit', $controller.'@edit')->name('pending.edit');
 	Route::post('/pending/store', $controller.'@store')->name('pending.store');
 	Route::delete('/pending/store/{id}', $controller.'@destroy')->name('pending.destroy');
+
+	Route::get('/completed', $controller.'@completed')->name('completed');
+	// Route::get('/completed/{id}/edit', $controller.'@edit')->name('completed.edit');
+	// Route::post('/completed/store', $controller.'@store')->name('completed.store');
+	// Route::delete('/completed/store/{id}', $controller.'@destroy')->name('completed.destroy');
+
+	Route::get('/procurement', $controller.'@procurement')->name('procurement');
+
+	Route::get('/inventory', $controller.'@inventory')->name('inventory');
 	
 });
 

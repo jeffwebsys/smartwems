@@ -55,7 +55,6 @@ class MainController extends Controller
             'equipment_id' => $request->equipment_id,
             'staff_name' => $request->staff_name,
         ]);
-        dd($userTicket);
         // when done assigned team - with pending status
         $ticket = Ticket::where('id', $request->ticket_id)->update(['status' => 1]);
 

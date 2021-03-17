@@ -24,6 +24,7 @@ class CreateEquipmentTable extends Migration
             $table->string('property_no');
             $table->date('ac_date');
             $table->integer('unit_cost');
+            $table->integer('status');
             $table->string('res_personnel');
             $table->string('remarks');
             $table->date('last_pm');

@@ -6,190 +6,141 @@
 
 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
     {{-- <a class="btn btn-primary mb-2 mr-2" href="javascript:void(0)" id="createNewuser"><i data-feather="plus-circle"></i> Add user</a> --}}
-    <div class="widget-content widget-content-area br-6">
-        <div class="table-responsive mb-4 mt-4">
-            <table class="table table-hover data-table" style="width:100%">
-                <thead>
-                    <tr>
-                        <th hidden>Service ID</th>
-                        <th>Ticket ID</th>
-                        <th>Request Date</th>
-                        <th>Description</th>
-                        <th>Equipment Name</th>
-                        <th>Request By</th>
-                        <th>Ticket Status</th>
-                        <th>Action</th>
-                    
-                    </tr>
-                </thead>
-                <tbody>
-                   
-                </tbody>
-                {{-- <thead>
-                    <tr class="text-center">
-                        <th>No</th>
-                        <th>user</th>
-                        <th>Action</th>
-                         
-                       
-                    </tr>
-                </thead> --}}
-            </table>
-        </div>
-    </div>
-</div>
-   
-
-
-
-{{-- Assign Modal --}}
-<div class="modal fade" id="userAssign" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="userHeading">Update Ticket</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="userAssign" name="userAssign" class="simple-example" action="javascript:void(0);" required>
-                    <div id="validation-errors"></div>
-                    <div class="form-row">
-                        <div class="col-md-12 mb-4">
-                            <h3 style="font-size: 16px;"><strong>Troubleshooting details:</strong> </h3>
-                          
-                                <textarea name="t_name" id="t_name" cols="25" rows="5"></textarea>
-                           
-                        </div>
-                        {{-- <div class="col-md-6 mb-4">
-                           
-                        </div> --}}
-                    </div>
-                  
-               
-                    
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                        <button type="submit" class="btn btn-primary" id="userSave">Save</button>
-                    </div>
-                    
-            </div>
-          
-        </form>
-        </div>
-    </div>
+    <form id="general-info" class="section general-info">
+                                        <div class="info">
+                                            <h6 class="">General Information</h6>
+                                            <div class="row">
+                                                <div class="col-lg-11 mx-auto">
+                                                    <div class="row">
+                                                        <div class="col-xl-2 col-lg-12 col-md-4">
+                                                            <div class="upload mt-4 pr-md-4">
+                                                                <div class="dropify-wrapper has-preview"><div class="dropify-message"><span class="file-icon"></span> <p>Click to Upload or Drag n Drop</p><p class="dropify-error">Ooops, something wrong appended.</p></div><div class="dropify-loader" style="display: none;"></div><div class="dropify-errors-container"><ul></ul></div><input type="file" id="input-file-max-fs" class="dropify" data-default-file="assets/img/200x200.jpg" data-max-file-size="2M"><button type="button" class="dropify-clear"><i class="flaticon-close-fill"></i></button><div class="dropify-preview" style="display: block;"><span class="dropify-render"><img src="assets/img/200x200.jpg"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner">200x200.jpg</span></p><p class="dropify-infos-message">Upload or Drag n Drop</p></div></div></div></div>
+                                                                <p class="mt-2"><i class="flaticon-cloud-upload mr-1"></i> Upload Picture</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
+                                                            <div class="form">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="fullName">Full Name</label>
+                                                                            <input type="text" class="form-control mb-4" id="fullName" placeholder="Full Name" value="Jimmy Turner">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <label class="dob-input">Date of Birth</label>
+                                                                        <div class="d-sm-flex d-block">
+                                                                            <div class="form-group mr-1">
+                                                                                <select class="form-control" id="exampleFormControlSelect1">
+                                                                                  <option>Day</option>
+                                                                                  <option>1</option>
+                                                                                  <option>2</option>
+                                                                                  <option>3</option>
+                                                                                  <option>4</option>
+                                                                                  <option>5</option>
+                                                                                  <option>6</option>
+                                                                                  <option>7</option>
+                                                                                  <option>8</option>
+                                                                                  <option>9</option>
+                                                                                  <option>10</option>
+                                                                                  <option>11</option>
+                                                                                  <option>12</option>
+                                                                                  <option>13</option>
+                                                                                  <option>14</option>
+                                                                                  <option>15</option>
+                                                                                  <option>16</option>
+                                                                                  <option>17</option>
+                                                                                  <option>18</option>
+                                                                                  <option>19</option>
+                                                                                  <option selected="">20</option>
+                                                                                  <option>21</option>
+                                                                                  <option>22</option>
+                                                                                  <option>23</option>
+                                                                                  <option>24</option>
+                                                                                  <option>25</option>
+                                                                                  <option>26</option>
+                                                                                  <option>27</option>
+                                                                                  <option>28</option>
+                                                                                  <option>29</option>
+                                                                                  <option>30</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group mr-1">
+                                                                                <select class="form-control" id="month">
+                                                                                    <option>Month</option>
+                                                                                    <option selected="">Jan</option>
+                                                                                    <option>Feb</option>
+                                                                                    <option>Mar</option>
+                                                                                    <option>Apr</option>
+                                                                                    <option>May</option>
+                                                                                    <option>Jun</option>
+                                                                                    <option>Jul</option>
+                                                                                    <option>Aug</option>
+                                                                                    <option>Sep</option>
+                                                                                    <option>Oct</option>
+                                                                                    <option>Nov</option>
+                                                                                    <option>Dec</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group mr-1">
+                                                                                <select class="form-control" id="year">
+                                                                                  <option>Year</option>
+                                                                                  <option>2018</option>
+                                                                                  <option>2017</option>
+                                                                                  <option>2016</option>
+                                                                                  <option>2015</option>
+                                                                                  <option>2014</option>
+                                                                                  <option>2013</option>
+                                                                                  <option>2012</option>
+                                                                                  <option>2011</option>
+                                                                                  <option>2010</option>
+                                                                                  <option>2009</option>
+                                                                                  <option>2008</option>
+                                                                                  <option>2007</option>
+                                                                                  <option>2006</option>
+                                                                                  <option>2005</option>
+                                                                                  <option>2004</option>
+                                                                                  <option>2003</option>
+                                                                                  <option>2002</option>
+                                                                                  <option>2001</option>
+                                                                                  <option>2000</option>
+                                                                                  <option>1999</option>
+                                                                                  <option>1998</option>
+                                                                                  <option>1997</option>
+                                                                                  <option>1996</option>
+                                                                                  <option>1995</option>
+                                                                                  <option>1994</option>
+                                                                                  <option>1993</option>
+                                                                                  <option>1992</option>
+                                                                                  <option>1991</option>
+                                                                                  <option>1990</option>
+                                                                                  <option selected="">1989</option>
+                                                                                  <option>1988</option>
+                                                                                  <option>1987</option>
+                                                                                  <option>1986</option>
+                                                                                  <option>1985</option>
+                                                                                  <option>1984</option>
+                                                                                  <option>1983</option>
+                                                                                  <option>1982</option>
+                                                                                  <option>1981</option>
+                                                                                  <option>1980</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="profession">Profession</label>
+                                                                    <input type="text" class="form-control mb-4" id="profession" placeholder="Designer" value="Web Developer">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
 </div>
 
 @endsection
 
-@push('scripts')
-<script src="{{ asset('assets/js/swal.js') }}"></script>
-<script>
-    $(document).ready(function () {
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-
-    var table = $(".data-table").DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('maintenancestaff.pending') }}",
-        columns: [
-            //   {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                { data: "ticket_id", name: "ticket_id" },
-                { data: "created_at", name: "created_at" },
-                { data: "reason", name: "reason" },
-                { data: "user_id", name: "user_id" },
-                { data: "supervisor", name: "supervisor" },
-                { data: "status", name: "status" },
-                  { data: "assign", name: "assign" },
-               
-    
-            // { data: "action", name: "action", orderable: false, searchable: false },
-        ],
-    });
-    // Add user
-    $("#createNewuser").click(function () {
-        $("#userSave").val("create-product");
-        $("#user_id").val("");
-        $("#userForm").trigger("reset");
-        $("#userHeading").html("E-quipment");
-        $("#userModal").modal("show");
-    });
-    //   assign SRL
-    $("body").on("click", ".editUser", function () {
-        var ticket_id = $(this).data("id");
-      
-        // var ticket_id 
-        $.get("{{ route('maintenancestaff.pending') }}" + "/" + ticket_id + "/edit", function (data) {
-            // $("#userName").html(data.name);
-            $("#userSave").val("edit-user");
-            $("#ticket_id").val(ticket_id);
-            $("#ticks").html(ticket_id);
-            $("#t_name").val(data.name);
-            $("#userAssign").modal("show");
-        });
-    });
-   
-    // User Assign
-    if ($("#userAssign").length > 0) {
-        $("#userAssign").validate({
-            rules: {
-                name: "required",
-                password: "required",
-                email: "required"
-            },
-            messages: {
-                name:  "Please Enter Username",
-                password: "Please Enter Password",  
-                email: {
-                required: "We need your email address to contact you",
-                    email: "Your email address must be in the format of name@domain.com"
-                }
-            },
-
-            submitHandler: function () {
-                //   add data
-                var user_id = $("#user_id").val();
-                var ticket_id =  $("#ticket_id").val();
-                $(".submit").attr("disabled", true);
-                $.ajax({
-                    data:{ user_id: user_id, ticket_id: ticket_id },
-                    url: "{{ route('supervisor.stafflist.store') }}",
-                    type: "POST",
-                    dataType: "json",
-                    success: function (data) {
-                        $("#userAssign").trigger("reset");
-                        $("#userAssign").modal("hide");
-                        Swal.fire({
-                            toast: true,
-                            position: "top-end",
-                            icon: "success",
-                            title: "Assigned Successfully!",
-                            showConfirmButton: false,
-                            timer: 3500,
-                        });
-                        table.draw();
-                    },
-                    error:function (response){
-                    $.each(response.responseJSON.errors,function(field_name,error){
-                        $(document).find('[name='+field_name+']').after('<span class="alert alert-gradient mb-4">' +error+ '</span>')
-                        $('.alert').delay(3000).fadeOut();
-                    })
-                }
-                });
-
-                //end scripts
-            },
-        });
-    }
-   
-});
-
- 
-  </script>
-  
-@endpush
