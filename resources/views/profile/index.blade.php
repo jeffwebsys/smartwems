@@ -28,7 +28,7 @@
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="fullName">Full Name</label>
-                                                                            <input type="text" class="form-control mb-4" id="fullName" placeholder="Full Name" value="Jimmy Turner">
+                                                                            <input type="text" class="form-control mb-4" id="fullName" placeholder="Full Name" value="{{ auth()->user()->name }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -134,8 +134,25 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="profession">Profession</label>
-                                                                    <input type="text" class="form-control mb-4" id="profession" placeholder="Designer" value="Web Developer">
+                                                                   <span class="badge badge-success"> Company Role </span> 
+                                                                    @php
+                                                                    if(auth()->user()->user_type == 1):
+                                                                    $role =  'Admin';
+                                                                    elseif(auth()->user()->user_type == 2):
+                                                                    $role =  'Supervisor';
+                                                                    elseif(auth()->user()->user_type == 3):
+                                                                    $role =  'Maintenance Staff';
+                                                                    elseif(auth()->user()->user_type == 4):
+                                                                    $role =  'Staff';
+                                                                    elseif(auth()->user()->user_type == 5):
+                                                                    $role =  'Supply Officer';
+                                                                    elseif(auth()->user()->user_type == 6):
+                                                                    $role =  'Supplier';
+                                                                    else: 
+                                                                    $role = 'Not Logged In';
+                                                                    endif;
+                                                                    @endphp
+                                                          <span class="badge badge-primary"> {{ $role }} </span> 
                                                                 </div>
                                                             </div>
                                                         </div>

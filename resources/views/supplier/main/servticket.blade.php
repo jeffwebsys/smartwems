@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 @section('content')
-@section('title','Procurement Request')
+@section('title','Service Ticket Request')
 
 
 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
@@ -11,14 +11,14 @@
             <table class="table table-hover data-table" style="width:100%">
                 <thead>
                     <tr>
-                       
-                         <th>Procurement ID</th>
-                        <th>Date Requested</th>
+                        <th hidden>Service ID</th>
+                         <th>Ticket ID</th>
+                        <th>Request Date</th>
+                        <th>Problem</th>
                         <th>Equipment Name</th>
-                        <th>Request Origin</th>
-                        <th>Request By</th>
-                        <th>Status</th>
-                        <th>Attachments</th> 
+                        <th>Model No.</th>
+                        <th>Serial No.</th>
+                        <th>Troubleshooting</th>
                     
                     </tr>
                 </thead>
@@ -94,14 +94,14 @@
     var table = $(".data-table").DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('maintenancestaff.procurement') }}",
+        ajax: "{{ route('supplier.servicerequest') }}",
         columns: [
             //   {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                { data: "id", name: "id" },
+                { data: "ticket_id", name: "ticket_id" },
                 { data: "created_at", name: "created_at" },
-                { data: "equip_name", name: "equip_name" },
-                { data: "request_origin", name: "request_origin" },
-                 { data: "request_by", name: "request_by" },
+                 { data: "user_id", name: "user_id" },
+                { data: "item", name: "item" },
+                { data: "supervisor", name: "supervisor" },
                 { data: "status", name: "status" },
                   { data: "assign", name: "assign" },
                

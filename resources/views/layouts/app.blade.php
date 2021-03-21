@@ -41,6 +41,12 @@
         display: block;
 
     }
+    table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting {
+
+            font-size: 10px;
+            color: black;
+            font-weight: 800;
+    }
     
  div .fw-900 > label, option {
      font-weight: 900;

@@ -57,6 +57,8 @@ Route::group(['prefix' => 'supervisor', 'as' => 'supervisor.', 'middleware' => [
 	Route::get('/stafflist/{id}/edit', $controller.'@edit')->name('stafflist.edit');
 	Route::post('/stafflist/store', $controller.'@store')->name('stafflist.store');
 	Route::delete('/stafflist/store/{id}', $controller.'@destroy')->name('stafflist.destroy');
+
+	Route::get('/notify', $controller.'@notify')->name('notify');
 	
 });
 
@@ -82,6 +84,8 @@ Route::group(['prefix' => 'maintenancestaff', 'as' => 'maintenancestaff.', 'midd
 	// Route::delete('/completed/store/{id}', $controller.'@destroy')->name('completed.destroy');
 
 	Route::get('/procurement', $controller.'@procurement')->name('procurement');
+	Route::get('/procurement/{id}/edit', $controller.'@getProcurement')->name('procurement.edit');
+	Route::post('/procurement/store', $controller.'@procurementStore')->name('procurement.store');
 
 	Route::get('/inventory', $controller.'@inventory')->name('inventory');
 	
@@ -125,6 +129,10 @@ Route::group(['prefix' => 'supplyofficer', 'as' => 'supplyofficer.', 'middleware
 	Route::post('/equipment/store', $controller.'@store')->name('equipment.store');
 	Route::put('/equipment/{id}/update', $controller.'@update')->name('equipment.update');
 	Route::delete('/equipment/store/{id}', $controller.'@destroy')->name('equipment.destroy');
+
+	Route::get('/procurement', $controller.'@procurement')->name('procurement');
+
+	Route::get('/reports', $controller.'@reports')->name('reports');
 	
 });
 
@@ -139,10 +147,14 @@ Route::group(['prefix' => 'supplier', 'as' => 'supplier.', 'middleware' => ['App
 	$dir = 'Supplier';
 	$controller = $dir . '\MainController';
 
-	Route::get('/procurement', $controller.'@index')->name('procurement');
+	Route::get('/procurement', $controller.'@procurement')->name('procurement');
 	Route::get('/procurement/{id}/edit', $controller.'@edit')->name('procurement.edit');
 	Route::post('/procurement/store', $controller.'@store')->name('procurement.store');
 	Route::put('/procurement/{id}/update', $controller.'@update')->name('procurement.update');
 	Route::delete('/procurement/store/{id}', $controller.'@destroy')->name('procurement.destroy');
+
+	Route::get('/servicerequest', $controller.'@servticket')->name('servicerequest');
+	Route::get('/servicerequest/{id}/edit', $controller.'@edit')->name('servicerequest.edit');
+	Route::post('/servicerequest/store', $controller.'@store')->name('servicerequest.store');
 	
 });

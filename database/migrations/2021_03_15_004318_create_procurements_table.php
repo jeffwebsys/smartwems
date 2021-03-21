@@ -15,6 +15,10 @@ class CreateProcurementsTable extends Migration
     {
         Schema::create('procurements', function (Blueprint $table) {
             $table->id();
+            $table->integer('equipment_id');
+            $table->integer('user_id');
+            $table->integer('ticket_id');
+            $table->string('attachment')->nullable()->default();
             $table->timestamps();
         });
     }

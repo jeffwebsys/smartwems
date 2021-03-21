@@ -11,7 +11,7 @@
             <table class="table table-hover data-table" style="width:100%">
                 <thead>
                     <tr>
-                        <th hidden>Service ID</th>
+                       
                          <th>Ticket ID</th>
                          <th>Equipment ID</th>
                         <th>Request Date</th>
@@ -43,7 +43,7 @@
 
 
 
-{{-- Assign Modal --}}
+<!-- Assign Modal -->
 <div class="modal fade" id="userAssign" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -79,6 +79,7 @@
         </div>
     </div>
 </div>
+
 
 @endsection
 
@@ -132,6 +133,8 @@
             $("#userAssign").modal("show");
         });
     });
+
+
    
     // User Assign
     if ($("#userAssign").length > 0) {
@@ -186,6 +189,59 @@
             },
         });
     }
+
+    // Procurement
+
+    $("body").on("click", ".Proc", function () {
+
+        var ticket_id = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+        var equipment_id = $(this).closest('tr').find('td:eq(1)').text();
+        var pending = $(this).closest('tr').find('td:eq(6)').text();
+
+
+        if(pending == " Pending ") {
+
+            Swal.fire({
+                            toast: true,
+                            position: "top-end",
+                            icon: "warning",
+                            title: "Ticket not yet submitted!",
+                            showConfirmButton: false,
+                            timer: 3500,
+                        });
+
+        }else{
+        
+        Swal.fire({
+            title: "Confirm Procurement Request",
+            text: "Please press okay button!",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Send Request!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Request Sent!", "Ticket has been logged.", "success");
+
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('maintenancestaff.procurement.store') }}",
+                        data:{ equipment_id: equipment_id, ticket_id: ticket_id  },
+                        success: function (data) {
+                            table.draw();
+                        },
+                        error: function (data) {
+                            console.log("Error:", data);
+                        },
+                    });
+                }
+            }
+        });
+        }
+
+    });
    
 });
 

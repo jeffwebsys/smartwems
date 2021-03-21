@@ -11,7 +11,7 @@
             <table class="table table-hover data-table" style="width:100%">
                 <thead>
                     <tr>
-                        <th hidden>Service ID</th>
+                       
                          <th>Ticket ID</th>
                          <th>Equipment ID</th>
                         <th>Request Date</th>

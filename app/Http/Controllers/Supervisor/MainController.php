@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Supervisor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\Ticket;
 use App\UserTicket;
+use App\Notify;
 use DataTables;
 use Response;
 
@@ -70,5 +72,9 @@ class MainController extends Controller
         User::find($id)->delete();
 
         return response()->json(['success' => 'Provincial deleted successfully.']);
+    }
+    public function notify(){
+        $data = Notify::paginate(6);
+        return view('supervisor.main.notify',compact('data'));
     }
 }

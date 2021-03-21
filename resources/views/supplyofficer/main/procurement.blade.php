@@ -12,13 +12,14 @@
                 <thead>
                     <tr>
                        
-                         <th>Procurement ID</th>
+                        <th>Procurement ID</th>
                         <th>Date Requested</th>
                         <th>Equipment Name</th>
                         <th>Request Origin</th>
                         <th>Request By</th>
                         <th>Status</th>
                         <th>Attachments</th> 
+                        <th>Action</th> 
                     
                     </tr>
                 </thead>
@@ -47,7 +48,7 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="userHeading">Update Ticket</h5>
+                <h5 class="modal-title" id="userHeading">Notify Supplier</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -57,10 +58,13 @@
                     <div id="validation-errors"></div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <h3 style="font-size: 16px;"><strong>Troubleshooting details:</strong> </h3>
-                          <input type="text" name="equipment_id" id="equipment_id" hidden>
-                          <input type="text" name="ticket_id" id="ticket_id" hidden>
-                                <textarea name="t_name" id="t_name" cols="25" rows="5" required></textarea>
+                            <h3 style="font-size: 16px;"><strong>Supplier details:</strong> </h3>
+                     <select name="supplier" id="supplier" class="form-control">
+                        @foreach($user as $user)
+                         <option value="{{ $user->id }}">{{ $user->name }}</option>
+                         @endforeach
+                       
+                     </select>
                            
                         </div>
                     </div>
@@ -69,7 +73,7 @@
                     
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                        <button type="submit" class="btn btn-primary" id="userSave">Save</button>
+                        <button type="submit" class="btn btn-primary" id="userSave">Send</button>
                     </div>
                     
             </div>
@@ -94,16 +98,17 @@
     var table = $(".data-table").DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('maintenancestaff.procurement') }}",
+        ajax: "{{ route('supplyofficer.procurement') }}",
         columns: [
             //   {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 { data: "id", name: "id" },
                 { data: "created_at", name: "created_at" },
                 { data: "equip_name", name: "equip_name" },
                 { data: "request_origin", name: "request_origin" },
-                 { data: "request_by", name: "request_by" },
+                { data: "request_by", name: "request_by" },
                 { data: "status", name: "status" },
-                  { data: "assign", name: "assign" },
+                { data: "assign", name: "assign" },
+                { data: "action", name: "action" },
                
     
             // { data: "action", name: "action", orderable: false, searchable: false },
