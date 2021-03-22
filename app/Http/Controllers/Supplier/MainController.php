@@ -11,6 +11,8 @@ use DataTables;
 use App\Notify;
 use App\Procurement;
 use App\User;
+use App\File;
+use Illuminate\Support\Facades\Storage;
 
 use Response;
 
@@ -74,12 +76,12 @@ class MainController extends Controller
     }
     public function edit($id)
     {
-        $user = UserTicket::find($id);
+        $user = Procurement::find($id);
         return response()->json($user);
     }
     public function destroy($id)
     {
-        UserTicket::find($id)->delete();
+        Procurement::find($id)->delete();
 
         return response()->json(['success' => 'Provincial deleted successfully.']);
     }
@@ -118,6 +120,7 @@ class MainController extends Controller
                 ->addColumn('assign', function ($data) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editUser">Update Progress</a>';
 
+
                     return $btn;
                 })
 
@@ -129,7 +132,7 @@ class MainController extends Controller
     }
    public function procurement(Request $request)
     {
-         $user = User::where('user_type', 6)->get();
+      
         if ($request->ajax()) {
            
             $data = Procurement::all();
@@ -155,32 +158,56 @@ class MainController extends Controller
                     return $data->tixStatus;
                 })
                 ->addColumn('assign', function ($data) {
-                    if($data->attachment == NULL){
-
-                        $ath = 'No Data';
-                    }
-
-                   return $ath;
-                })
-                ->addColumn('action', function ($data) {
                                   
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="Edit" class="editUser">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg></a>';
-                  
-                     $btn = $btn. '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="EditProc" class="Proc">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-hard-drive"><line x1="22" y1="12" x2="2" y2="12"></line><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line x1="6" y1="16" x2="6.01" y2="16"></line><line x1="10" y1="16" x2="10.01" y2="16"></line></svg></a>';
-                   
-
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="EditProc" class="editUser">
+                     <span class="badge badge-success">Upload File</span></a>';
+                    
                     return $btn;
                     
                 })
+                ->addColumn('file', function ($data) {
 
-                ->rawColumns(['id', 'created_at', 'equip_name', 'request_origin', 'request_by', 'status' ,'assign', 'action'  ])
+                    $filename =  $data->files['title'];
+                    $file = storage_path('app/public/file/' . $filename);
+                   
+                    return '<a href="' . url('storage/file/'.$filename) . '"><img src="' . url('storage/file/'.$filename) . '" alt="item-01" width="50" height="50"/></img></a>';
+ 
+
+                })
+                ->rawColumns(['id', 'created_at', 'equip_name', 'request_origin', 'request_by', 'status' ,'assign', 'file' ])
                 ->make(true);
         }
 
-        return view('supplier.main.procurement',compact('user'))->with('data');
+        return view('supplier.main.procurement')->with('data');
     }
+    public function fileStore(Request $request) {
+
+       
+       
+        $imageData = $this->imageData();
+     
+        foreach ($imageData['image'] as $val) {
+            $file = $val;
+            $filenameWithExt = $val->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $val->getClientOriginalExtension();
+            $fileNameToStore = $filename . '_' . date('mdYHis') . uniqid() . '.' . $extension;
+            $path = $val->storeAs('public/file/', $fileNameToStore);
+
+           $filedb = File::updateOrCreate(
+                ['procurement_id' =>$request->procurement_id],
+                ['title' => $fileNameToStore]
+            );
+           
+
+            return Response::json($filedb);
+        }
+       
+
+       
+    }
+        
+      
     public function inventory(Request $request)
     {
         if ($request->ajax()) {
@@ -223,5 +250,12 @@ class MainController extends Controller
         }
 
         return view('maintenancestaff.main.inventory')->with('data');
+    }
+    private function imageData(){
+
+        return request()->validate([
+            'image' => 'required', 
+            'image.*' => 'mimes:jpeg,bmp,png|max:1024'
+            ]);
     }
 }

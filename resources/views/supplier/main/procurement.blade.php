@@ -18,8 +18,9 @@
                         <th>Request Origin</th>
                         <th>Request By</th>
                         <th>Status</th>
-                        <th>Attachments</th> 
-                        <th>Action</th> 
+                        <th>Attach Quotation</th> 
+                         <th>Attachment Preview</th> 
+                   
                     
                     </tr>
                 </thead>
@@ -44,27 +45,30 @@
 
 
 {{-- Assign Modal --}}
-<div class="modal fade" id="userAssign" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+<div class="modal fade" id="test" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="userHeading">Notify Supplier</h5>
+                <h5 class="modal-title" id="userHeading">Attach Quotation</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="userAssign" name="userAssign" class="simple-example" action="javascript:void(0);" required>
-                    <div id="validation-errors"></div>
+                <form id="best" name="best" class="simple-example" action="javascript:void(0);" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <h3 style="font-size: 16px;"><strong>Supplier details:</strong> </h3>
-                     <select name="supplier" id="supplier" class="form-control">
-                        @foreach($user as $user)
-                         <option value="{{ $user->id }}">{{ $user->name }}</option>
-                         @endforeach
-                       
-                     </select>
+                            <div class="custom-file-container" data-upload-id="myFirstImage">
+                                    <div id="validation-errors"></div>
+                            <label>Upload (Single File) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                            <label class="custom-file-container__custom-file" >
+                           <input type="hidden" name="procurement_id" id="procurement_id"/>
+                           <input type="file" class="custom-file-container__custom-file__custom-file-input" accept="image/*" name="image[]" id="image">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                            <span class="custom-file-container__custom-file__custom-file-control"></span>
+                            </label>
+                            <div class="custom-file-container__image-preview"></div>
+                            </div>
                            
                         </div>
                     </div>
@@ -73,20 +77,45 @@
                     
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                        <button type="submit" class="btn btn-primary" id="userSave">Send</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
                     </div>
-                    
+                
             </div>
-          
         </form>
         </div>
     </div>
 </div>
 
-@endsection
+{{-- View File --}}
 
+<div class="modal fade" id="test2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userHeading">Attach Quotation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                test
+        </div>
+    </div>
+</div>
+
+@endsection
+@push('styles')
+    
+@endpush
+<link href="{{ asset('assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet" type="text/css">
 @push('scripts')
 <script src="{{ asset('assets/js/swal.js') }}"></script>
+<script src="{{ asset('assets/js/scrollspyNav.js') }}"></script>
+<script src="{{ asset('plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
+<script>
+var firstUpload = new FileUploadWithPreview('myFirstImage')
+</script>
 <script>
     $(document).ready(function () {
     $.ajaxSetup({
@@ -108,37 +137,40 @@
                 { data: "request_by", name: "request_by" },
                 { data: "status", name: "status" },
                 { data: "assign", name: "assign" },
-                { data: "action", name: "action" },
-               
+                { data: "file", name: "file" },
+              
     
             // { data: "action", name: "action", orderable: false, searchable: false },
         ],
     });
-    // Add user
-    $("#createNewuser").click(function () {
-        $("#userSave").val("create-product");
-        $("#user_id").val("");
-        $("#userForm").trigger("reset");
-        $("#userHeading").html("E-quipment");
-        $("#userModal").modal("show");
-    });
+ 
     //   assign SRL
     $("body").on("click", ".editUser", function () {
         var ticket_id = $(this).data("id");
-        var equipment_id = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+        var procurement_id = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+        $('#procurement_id').val(procurement_id);
         // var ticket_id 
-        $.get("{{ route('maintenancestaff.pending') }}" + "/" + ticket_id + "/edit", function (data) {
-            // $("#userName").html(data.name);
-            $("#userSave").val("edit-user");
-            $("#ticket_id").val(ticket_id);
-            $("#equipment_id").val(equipment_id);
-            $("#userAssign").modal("show");
+        $.get("{{ route('supplier.procurement') }}" + "/" + ticket_id + "/edit", function (data) {
+            
+            $("#test").modal("show");
+        });
+    });
+
+    //   View File
+    $("body").on("click", ".viewFile", function () {
+        var ticket_id = $(this).data("id");
+        var procurement_id = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+        $('#procurement_id').val(procurement_id);
+        // var ticket_id 
+        $.get("{{ route('supplier.procurement') }}" + "/" + ticket_id + "/edit", function (data) {
+            
+            $("#test2").modal("show");
         });
     });
    
     // User Assign
-    if ($("#userAssign").length > 0) {
-        $("#userAssign").validate({
+    if ($("#best").length > 0) {
+        $("#best").validate({
             rules: {
                 name: "required",
                 password: "required",
@@ -155,23 +187,26 @@
 
             submitHandler: function () {
                 //   add data
-                var equipment_id = $("#equipment_id").val();
-                var ticket_id =  $("#ticket_id").val();
-                var remarks =  $("textarea#t_name").val();
+
+                var formData = new FormData(document.getElementById("best"));
+    
                 $(".submit").attr("disabled", true);
+                
                 $.ajax({
-                    data:{ equipment_id: equipment_id, ticket_id: ticket_id, remarks: remarks  },
-                    url: "{{ route('maintenancestaff.pending.store') }}",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    url: "{{ route('supplier.file.store') }}",
                     type: "POST",
                     dataType: "json",
                     success: function (data) {
-                        $("#userAssign").trigger("reset");
-                        $("#userAssign").modal("hide");
+                        $("#test").trigger("reset");
+                        $("#test").modal("hide");
                         Swal.fire({
                             toast: true,
                             position: "top-end",
                             icon: "success",
-                            title: "Ticket Updated Successfully!",
+                            title: "File Uploaded Successfully!",
                             showConfirmButton: false,
                             timer: 3500,
                         });

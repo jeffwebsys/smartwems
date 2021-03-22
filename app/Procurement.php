@@ -40,4 +40,7 @@ class Procurement extends Model
         return $list[$this->procurementTicket->status];
 
     }
+      public function files() {
+        return $this->hasOne(File::class);
+    }
 }

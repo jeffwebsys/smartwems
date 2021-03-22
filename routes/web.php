@@ -23,6 +23,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@myprofile')->name('myprofile');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
+// MEDIA
+  
+
+   
+
 
 // Administrator
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\Middleware\Administrator','auth'/*,'verified'*/]], function(){
@@ -156,5 +161,9 @@ Route::group(['prefix' => 'supplier', 'as' => 'supplier.', 'middleware' => ['App
 	Route::get('/servicerequest', $controller.'@servticket')->name('servicerequest');
 	Route::get('/servicerequest/{id}/edit', $controller.'@edit')->name('servicerequest.edit');
 	Route::post('/servicerequest/store', $controller.'@store')->name('servicerequest.store');
+
+	Route::post('/file/store', $controller.'@fileStore')->name('file.store');
+
+	Route::get('f/{filename}', 'MediaController@supplierFile')->name('media.supplier');
 	
 });
