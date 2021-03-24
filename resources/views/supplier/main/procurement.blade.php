@@ -59,7 +59,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <div class="custom-file-container" data-upload-id="myFirstImage">
-                                    <div id="validation-errors"></div>
+                            <div id="validation-errors"></div>
                             <label>Upload (Single File) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
                             <label class="custom-file-container__custom-file" >
                            <input type="hidden" name="procurement_id" id="procurement_id"/>

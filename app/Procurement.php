@@ -13,7 +13,8 @@ class Procurement extends Model
                 'user_id',
                 'equipment_id',
                 'ticket_id',
-                'attachment'
+                'attachment',
+                'supplier_id'
     ];
 
     public function procurementUser() {

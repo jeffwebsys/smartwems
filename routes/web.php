@@ -136,8 +136,12 @@ Route::group(['prefix' => 'supplyofficer', 'as' => 'supplyofficer.', 'middleware
 	Route::delete('/equipment/store/{id}', $controller.'@destroy')->name('equipment.destroy');
 
 	Route::get('/procurement', $controller.'@procurement')->name('procurement');
+	Route::get('/procurement/{id}/edit', $controller.'@procurementEdit')->name('procurement.edit');
+	Route::post('/procurement/store', $controller.'@procurementStore')->name('procurement.store');
 
 	Route::get('/reports', $controller.'@reports')->name('reports');
+
+	Route::post('/print/pdf', $controller.'@printPdf')->name('printPdf');
 	
 });
 

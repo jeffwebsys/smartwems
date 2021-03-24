@@ -16,11 +16,10 @@ use Illuminate\Support\Facades\Storage;
 
 use Response;
 
-
 class MainController extends Controller
 {
     //
-     public function servticket(Request $request)
+    public function servticket(Request $request)
     {
         if ($request->ajax()) {
             $data = Notify::all();
@@ -43,13 +42,13 @@ class MainController extends Controller
                     return $data->serviceEquipment->model_no;
                 })
                 ->addColumn('status', function ($data) {
-                    return '<span class="badge badge-warning"> '.$data->serviceEquipment->serial_no.' </span>';
+                    return '<span class="badge badge-warning"> ' . $data->serviceEquipment->serial_no . ' </span>';
                 })
                 ->addColumn('name', function ($data) {
                     return $data->serviceTicket->name;
                 })
                 ->addColumn('assign', function ($data) {
-                    $btn = '<span class="badge badge-info"> troubleshooting details--- <i>'. $data->remarks.'</i> </span>';
+                    $btn = '<span class="badge badge-info"> troubleshooting details--- <i>' . $data->remarks . '</i> </span>';
 
                     return $btn;
                 })
@@ -63,13 +62,13 @@ class MainController extends Controller
     public function store(Request $request)
     {
         // Notify Supervisor
-        $notify = Notify::updateOrCreate([
-            'user_id' => auth()->user()->id],
-            ['ticket_id' => $request->ticket_id,
-            'equipment_id' => $request->equipment_id,
-            'remarks' => $request->remarks]
+        $notify = Notify::updateOrCreate(
+            [
+                'user_id' => auth()->user()->id,
+            ],
+            ['ticket_id' => $request->ticket_id, 'equipment_id' => $request->equipment_id, 'remarks' => $request->remarks]
         );
-          // Update the Value to Approval
+        // Update the Value to Approval
         $ticket = Ticket::where('id', $request->ticket_id)->update(['status' => 2]);
 
         return Response::json();
@@ -120,7 +119,6 @@ class MainController extends Controller
                 ->addColumn('assign', function ($data) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editUser">Update Progress</a>';
 
-
                     return $btn;
                 })
 
@@ -130,12 +128,10 @@ class MainController extends Controller
 
         return view('maintenancestaff.main.completed')->with('data');
     }
-   public function procurement(Request $request)
+    public function procurement(Request $request)
     {
-      
         if ($request->ajax()) {
-           
-            $data = Procurement::all();
+            $data = Procurement::where('supplier_id', auth()->user()->id);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('id', function ($data) {
@@ -158,34 +154,30 @@ class MainController extends Controller
                     return $data->tixStatus;
                 })
                 ->addColumn('assign', function ($data) {
-                                  
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="EditProc" class="editUser">
+                    $btn =
+                        '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' .
+                        $data->id .
+                        '" data-original-title="EditProc" class="editUser">
                      <span class="badge badge-success">Upload File</span></a>';
-                    
+
                     return $btn;
-                    
                 })
                 ->addColumn('file', function ($data) {
-
-                    $filename =  $data->files['title'];
+                    $filename = $data->files['title'];
                     $file = storage_path('app/public/file/' . $filename);
-                   
-                    return '<a href="' . url('storage/file/'.$filename) . '"><img src="' . url('storage/file/'.$filename) . '" alt="item-01" width="50" height="50"/></img></a>';
- 
 
+                    return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
                 })
-                ->rawColumns(['id', 'created_at', 'equip_name', 'request_origin', 'request_by', 'status' ,'assign', 'file' ])
+                ->rawColumns(['id', 'created_at', 'equip_name', 'request_origin', 'request_by', 'status', 'assign', 'file'])
                 ->make(true);
         }
 
         return view('supplier.main.procurement')->with('data');
     }
-    public function fileStore(Request $request) {
-
-       
-       
+    public function fileStore(Request $request)
+    {
         $imageData = $this->imageData();
-     
+
         foreach ($imageData['image'] as $val) {
             $file = $val;
             $filenameWithExt = $val->getClientOriginalName();
@@ -194,20 +186,12 @@ class MainController extends Controller
             $fileNameToStore = $filename . '_' . date('mdYHis') . uniqid() . '.' . $extension;
             $path = $val->storeAs('public/file/', $fileNameToStore);
 
-           $filedb = File::updateOrCreate(
-                ['procurement_id' =>$request->procurement_id],
-                ['title' => $fileNameToStore]
-            );
-           
+            $filedb = File::updateOrCreate(['procurement_id' => $request->procurement_id], ['title' => $fileNameToStore]);
 
             return Response::json($filedb);
         }
-       
-
-       
     }
-        
-      
+
     public function inventory(Request $request)
     {
         if ($request->ajax()) {
@@ -251,11 +235,11 @@ class MainController extends Controller
 
         return view('maintenancestaff.main.inventory')->with('data');
     }
-    private function imageData(){
-
+    private function imageData()
+    {
         return request()->validate([
-            'image' => 'required', 
-            'image.*' => 'mimes:jpeg,bmp,png|max:1024'
-            ]);
+            'image' => 'required',
+            'image.*' => 'mimes:jpeg,bmp,png|max:1024',
+        ]);
     }
 }

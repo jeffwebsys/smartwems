@@ -11,6 +11,8 @@ use App\Equipment;
 use App\EquipmentCategory;
 use App\EquipmentLocation;
 use App\Procurement;
+use App\PurchaseRequest;
+use PDF;
 use DataTables;
 use Response;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -85,9 +87,8 @@ class MainController extends Controller
     }
     public function procurement(Request $request)
     {
-         $user = User::where('user_type', 6)->get();
+        $user = User::where('user_type', 6)->get();
         if ($request->ajax()) {
-           
             $data = Procurement::all();
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -101,41 +102,77 @@ class MainController extends Controller
                 ->addColumn('equip_name', function ($data) {
                     return $data->procurementEquipment->item_name;
                 })
+                  ->addColumn('equip_loc', function ($data) {
+                    return $data->procurementEquipment->eqlocation['title'];
+                })
                 ->addColumn('request_origin', function ($data) {
                     return $data->procurementTicket->id;
+                })
+                ->addColumn('reason', function ($data) {
+                    return $data->procurementTicket->reason;
                 })
                 ->addColumn('request_by', function ($data) {
                     return $data->procurementUser->name;
                 })
+                ->addColumn('user_id', function ($data) {
+                    return $data->procurementUser['id'];
+                })
                 ->addColumn('status', function ($data) {
                     return $data->tixStatus;
                 })
-                ->addColumn('assign', function ($data) {
-                    if($data->attachment == NULL){
+               ->addColumn('assign', function ($data) {
+                    $filename = $data->files['title'];
+                    $file = storage_path('app/public/file/' . $filename);
 
-                        $ath = 'No Data';
-                    }
-
-                   return $ath;
+                    return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
                 })
                 ->addColumn('action', function ($data) {
-                                  
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="Edit" class="editUser">
+                    $btn =
+                        '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' .
+                        $data->id .
+                        '" data-original-title="Edit" class="editUser">
                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg></a>';
-                  
-                     $btn = $btn. '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="EditProc" class="Proc">
+
+                    $btn =
+                        $btn .
+                        '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' .
+                        $data->id .
+                        '" data-original-title="EditProc" class="Proc">
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-hard-drive"><line x1="22" y1="12" x2="2" y2="12"></line><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line x1="6" y1="16" x2="6.01" y2="16"></line><line x1="10" y1="16" x2="10.01" y2="16"></line></svg></a>';
-                   
 
                     return $btn;
-                    
                 })
 
-                ->rawColumns(['id', 'created_at', 'equip_name', 'request_origin', 'request_by', 'status' ,'assign', 'action'  ])
+                ->rawColumns(['id', 'created_at', 'equip_name', 'equip_loc', 'request_origin', 'reason', 'request_by', 'user_id', 'status', 'assign', 'action'])
                 ->make(true);
         }
 
-        return view('supplyofficer.main.procurement',compact('user'))->with('data');
+        return view('supplyofficer.main.procurement', compact('user'))->with('data');
+    }
+     public function printPdf(Request $request)
+    {
+        $purchase = PurchaseRequest::updateOrCreate(
+
+            ['procurement_id' => $request->pro_id],
+            ['user_id' => $request->user_id,
+            'equipment_id' => $request->eqid,
+            'ticket_id' => $request->ticket_id,
+            'remarks' => $request->remarks,
+            'budget' => $request->budget,
+            'approved_by' => auth()->user()->name ] );
+
+       
+        if ($purchase) {
+        
+            
+            $pdf = PDF::loadView('stub-form', compact('purchase'));
+            return $pdf->stream(); 
+
+        } else {
+
+            return redirect()->route('home');
+
+        }
     }
     public function store(Request $request)
     {
@@ -172,6 +209,13 @@ class MainController extends Controller
 
         return Response::json($response);
     }
+    public function procurementStore(Request $request)
+    {
+        $res = Procurement::updateOrCreate(['id' => $request->procurement_id], ['supplier_id' => $request->supplier_id]);
+       
+        return Response::json($res);
+      
+    }
     public function update(Request $request)
     {
         $data = $this->validatedForm();
@@ -198,6 +242,11 @@ class MainController extends Controller
     {
         $equipment = Equipment::find($id);
         return response()->json($equipment);
+    }
+    public function procurementEdit($id)
+    {
+        $procurement = Procurement::find($id);
+        return response()->json($procurement);
     }
     public function destroy($id)
     {
