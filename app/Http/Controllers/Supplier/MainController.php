@@ -168,7 +168,7 @@ class MainController extends Controller
 
                     // return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
                     if($data->files == NULL):
-                    $filename = 'ntx.jpg';
+                    $filename = 'ntx.png';
                    
                     return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
 
