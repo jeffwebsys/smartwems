@@ -191,12 +191,12 @@
     //   Assign Supplier
     $("body").on("click", ".editUser", function () {
         var procurement_id = $(this).data("id");
-        var equipment_id = $(this).closest("tr").find("td:eq(0)").text(); // amend the index as needed
+        var proc_id = $(this).closest("tr").find("td:eq(0)").text(); // amend the index as needed
         // var ticket_id
         $.get("{{ route('supplyofficer.procurement') }}" + "/" + procurement_id + "/edit", function (data) {
             // $("#userName").html(data.name);
             $("#userSave").val("edit-user");
-            $("#procurement_id").val(data.id);
+            $("#procurement_id").val(proc_id);
             $("#userAssign").modal("show");
         });
     });
@@ -315,6 +315,67 @@
             },
         });
     }
+
+    // Assign SUpplier
+    if ($("#userAssign").length > 0) {
+        $("#userAssign").validate({
+            rules: {
+                name: "required",
+                password: "required",
+                email: "required",
+            },
+            messages: {
+                name: "Please Enter Username",
+                password: "Please Enter Password",
+                email: {
+                    required: "We need your email address to contact you",
+                    email: "Your email address must be in the format of name@domain.com",
+                },
+            },
+
+            submitHandler: function () {
+                //   add data
+                let procurement_id = $("#procurement_id").val();
+                let supplier_id = $("#supplier_id").val();
+                 
+                $(".submit").attr("disabled", true);
+
+                $.ajax({
+                    data: { 
+                        procurement_id: procurement_id, 
+                        supplier_id: supplier_id, 
+                    },
+                    url: "{{ route('supplyofficer.procurement.store') }}",
+                    type: "POST",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#userAssign").trigger("reset");
+                        $("#userAssign").modal("hide");
+                        Swal.fire({
+                            toast: true,
+                            position: "top-end",
+                            icon: "success",
+                            title: "Assigned!",
+                            showConfirmButton: false,
+                            timer: 3500,
+                        });
+                        table.draw();
+                    },
+                    error: function (response) {
+                        $.each(response.responseJSON.errors, function (field_name, error) {
+                            $(document)
+                                .find("[name=" + field_name + "]")
+                                .after('<span class="alert alert-gradient mb-4">' + error + "</span>");
+                            $(".alert").delay(3000).fadeOut();
+                        });
+                    },
+                });
+
+                //end scripts
+            },
+        });
+    }
+
 
 
 

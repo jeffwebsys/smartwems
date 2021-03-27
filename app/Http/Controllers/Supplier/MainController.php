@@ -163,10 +163,19 @@ class MainController extends Controller
                     return $btn;
                 })
                 ->addColumn('file', function ($data) {
-                    $filename = $data->files['title'];
-                    $file = storage_path('app/public/file/' . $filename);
+                    // $filename = $data->files['title'];
+                    // $file = storage_path('app/public/file/' . $filename);
 
+                    // return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
+                    if($data->files == NULL):
+                    $filename = 'ntx.jpg';
+                   
                     return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
+
+                    else: 
+                        $filename = $data->files['title'];
+                        return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
+                    endif;
                 })
                 ->rawColumns(['id', 'created_at', 'equip_name', 'request_origin', 'request_by', 'status', 'assign', 'file'])
                 ->make(true);

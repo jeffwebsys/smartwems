@@ -32,10 +32,10 @@ class MainController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('item_name', function ($data) {
-                    return $data['item_name'];
+                    return '<a href="'. route('supplyofficer.equipmentView', $data->id) .'">'.$data->item_name.'</a>';
                 })
                 ->addColumn('item_description', function ($data) {
-                    return $data['item_description'];
+                  return $data->item_description;
                 })
                 ->addColumn('ac_date', function ($data) {
                     $time = $data->ac_date;
@@ -48,13 +48,8 @@ class MainController extends Controller
                     return $data->serial_no;
                 })
                 ->addColumn('status', function ($data) {
-                    if ($data->status == 0):
-                        $notif = '<span class="badge badge-warning"> Inactive </span>';
-                    else:
-                        $notif = '<span class="badge badge-primary"> Active </span>';
-                    endif;
-
-                    return $notif;
+            
+                    return $data->equipmentStatus;
                 })
                 ->addColumn('qr_code', function ($data) {
                     $qrcode = url("equipment/$data->id");
@@ -100,7 +95,7 @@ class MainController extends Controller
                     return $time;
                 })
                 ->addColumn('equip_name', function ($data) {
-                    return $data->procurementEquipment->item_name;
+                    return '<a href="'. route('supplyofficer.equipmentView', $data->procurementEquipment->id) .'">'.$data->procurementEquipment->item_name.'</a>';
                 })
                   ->addColumn('equip_loc', function ($data) {
                     return $data->procurementEquipment->eqlocation['title'];
@@ -121,10 +116,16 @@ class MainController extends Controller
                     return $data->tixStatus;
                 })
                ->addColumn('assign', function ($data) {
-                    $filename = $data->files['title'];
-                    $file = storage_path('app/public/file/' . $filename);
+                if($data->files == NULL):
+                    $filename = 'ntx.jpg';
+                   
+                    return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="No Attachment" width="50" height="50"/></img></a>';
 
-                    return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
+                    else: 
+                        $filename = $data->files['title'];
+                        return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
+                    endif;
+            
                 })
                 ->addColumn('action', function ($data) {
                     $btn =
@@ -211,7 +212,8 @@ class MainController extends Controller
     }
     public function procurementStore(Request $request)
     {
-        $res = Procurement::updateOrCreate(['id' => $request->procurement_id], ['supplier_id' => $request->supplier_id]);
+     
+        $res = Procurement::where('id' ,$request->procurement_id)->update(['supplier_id' => $request->supplier_id]);
        
         return Response::json($res);
       
@@ -242,6 +244,11 @@ class MainController extends Controller
     {
         $equipment = Equipment::find($id);
         return response()->json($equipment);
+    }
+     public function equipmentView($id)
+    {
+        $equipment = Equipment::find($id);
+        return view('supplyofficer.main.equipmentview',compact('equipment'));
     }
     public function procurementEdit($id)
     {

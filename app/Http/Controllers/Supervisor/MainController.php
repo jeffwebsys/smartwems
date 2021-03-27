@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\User;
+use App\Equipment;
 use App\Ticket;
 use App\UserTicket;
 use App\Notify;
@@ -59,8 +60,9 @@ class MainController extends Controller
         ]);
         // when done assigned team - with pending status
         $ticket = Ticket::where('id', $request->ticket_id)->update(['status' => 1]);
+        $equipment = Equipment::where('id', $request->equipment_id)->update(['status' => 3]);
 
-        return response()->json([$userTicket, $ticket]);
+        return response()->json([$userTicket, $ticket, $equipment]);
     }
     public function edit($id)
     {

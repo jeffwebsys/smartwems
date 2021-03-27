@@ -115,7 +115,10 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['App\Http\
 	Route::get('/servicelist/autocomplete', $controller.'@autocomplete')->name('servicelist.autocomplete');
 	Route::post('/servicelist/openticket', $controller.'@openticket')->name('servicelist.openticket');
 
-	
+	Route::get('/equipment', $controller.'@equipment')->name('equipment');
+	Route::get('/equipmentview/{id}', $controller.'@equipmentView')->name('equipmentView');
+	Route::post('/ticket/store', $controller.'@submitTicket')->name('submitTicket');
+	Route::post('/print/pdf', $controller.'@printPdf')->name('printPdf');
 });
 
 // Supply Officer
@@ -142,6 +145,8 @@ Route::group(['prefix' => 'supplyofficer', 'as' => 'supplyofficer.', 'middleware
 	Route::get('/reports', $controller.'@reports')->name('reports');
 
 	Route::post('/print/pdf', $controller.'@printPdf')->name('printPdf');
+
+	Route::get('/equipmentview/{id}', $controller.'@equipmentView')->name('equipmentView');
 	
 });
 

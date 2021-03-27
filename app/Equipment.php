@@ -36,4 +36,35 @@ class Equipment extends Model
 
         return $this->belongsTo(EquipmentLocation::class,'equipment_locations_id','id');
     }
+
+    public function equipmentTicket() {
+        return $this->hasOne(Ticket::class);
+    }
+
+     public function getTicketStatusAttribute() : string {
+
+        $list = [
+            0 => '<span class="badge badge-warning"> Unassigned </span>',
+            1 => '<span class="badge badge-success"> Pending </span>',
+            2 => '<span class="badge badge-success"> For Approval </span>',
+            3 => '<span class="badge badge-success"> Completed Request </span>',
+        ];
+
+        return $list[$this->equipmentTicket->status];
+
+    }
+    public function getEquipmentStatusAttribute() : string {
+
+        $list = [
+            0 => '<span class="badge badge-warning"> Inactive </span>',
+            1 => '<span class="badge badge-success"> Active </span>',
+            2 => '<span class="badge badge-warning"> Unassigned </span>',
+            3 => '<span class="badge badge-success"> Pending </span>',
+            4 => '<span class="badge badge-success"> For Approval </span>',
+            5 => '<span class="badge badge-success"> Completed Request </span>',
+        ];
+
+        return $list[$this->status];
+
+    }
 }

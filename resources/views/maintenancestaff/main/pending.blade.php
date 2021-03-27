@@ -123,12 +123,13 @@
     //   assign SRL
     $("body").on("click", ".editUser", function () {
         var ticket_id = $(this).data("id");
-        var equipment_id = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+        var equipment_id = $(this).closest('tr').find('td:eq(1)').text(); // amend the index as needed
+        var tix_id = $(this).closest('tr').find('td:eq(0)').text();
         // var ticket_id 
         $.get("{{ route('maintenancestaff.pending') }}" + "/" + ticket_id + "/edit", function (data) {
             // $("#userName").html(data.name);
             $("#userSave").val("edit-user");
-            $("#ticket_id").val(ticket_id);
+            $("#ticket_id").val(tix_id);
             $("#equipment_id").val(equipment_id);
             $("#userAssign").modal("show");
         });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\UserTicket;
+use App\Equipment;
 use App\Ticket;
 use App\Notify;
 use App\Procurement;
@@ -78,10 +79,11 @@ class MainController extends Controller
             'equipment_id' => $request->equipment_id,
             'remarks' => $request->remarks]
         );
-          // Update the Value to Approval
+        // Change value to For Approval
         $ticket = Ticket::where('id', $request->ticket_id)->update(['status' => 2]);
+        $equipment = Equipment::where('id', $request->equipment_id)->update(['status' => 4]);  
 
-        return Response::json();
+         return response()->json();
     }
       public function procurementStore(Request $request)
     {
@@ -94,7 +96,7 @@ class MainController extends Controller
 
             dd($procurementStore);
 
-        return Response::json();
+            return response()->json();
     }
     public function edit($id)
     {
