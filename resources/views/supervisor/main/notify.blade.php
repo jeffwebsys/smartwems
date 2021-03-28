@@ -8,12 +8,19 @@
                     <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12 layout-spacing">
                         <div class="widget widget-card-one">
                             <div class="widget-content">
+                                @if(Session::has('message'))
+                                <span class="badge badge-secondary ml-2 mb-4"> {{ Session::get('message') }} </span>
+                                @endif
 
                                 <div class="media">
+                                    <form id="complete" action="{{ route('supervisor.notify.store')}}" method="POST">
+                                    @csrf
                                     <div class="w-img">
                                         <img src="{{ asset('assets/img/90x90.jpg') }}" alt="avatar">
                                     </div>
                                     <div class="media-body">
+                                    <input type="text" name="equipment_id" value="{{ $ticket->serviceTicket->id }}" hidden>
+                                    <input type="text" name="ticket_id" value="{{ $ticket->serviceEquipment->id }}" hidden>
                                         <h6>{{ $ticket->serviceEquipment->item_name }}</h6>
                                         <p class="meta-date-time">{{ $ticket->serviceTicket->created_at }}</p>
                                     </div>
@@ -23,10 +30,10 @@
 
                                 <div class="w-action">
                                     <div class="card-like">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
-                                        <span>Complete Ticket</span>
+                                        <button type="submit" class="btn btn-primary" {{ ($ticket->serviceEquipment->status == 5 )  ? 'disabled' : '' }}>{{ ($ticket->serviceEquipment->status == 5 )  ? 'Ticket Completed' : 'Complete Ticket' }}</button>
                                     </div>
                                 </div>
+                            </form>
                             </div>
                         </div>
 

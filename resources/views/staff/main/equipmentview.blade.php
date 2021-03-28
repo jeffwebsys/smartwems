@@ -24,7 +24,7 @@
                                                         <div class="col-xl-2 col-lg-12 col-md-4">
                                                             <div class="upload mt-4 pr-md-4">
                                                                 <div class="avatar avatar-xl">
-                                                                <img alt="avatar" src="{{ asset('assets/img/90x90.jpg') }}" class="rounded-circle" />
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-package"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -179,8 +179,18 @@
                                                             </div>
                                                              
                                                             <div class="col-md-12">
+                                                                @if(($equipment->status == 2))
+                                                                <span class="badge badge-secondary ml-2 mb-4"> Ticket is On Progress </span>
+                                                                @elseif($equipment->status == 3)
+                                                                <span class="badge badge-secondary ml-2 mb-4"> Your Ticket is Already Assigned to One Of Maintenance Staff</span>
+                                                                @elseif($equipment->status == 4)
+                                                                <span class="badge badge-secondary ml-2 mb-4"> Your Ticket is For Approval</span>
+                                                                @elseif($equipment->status == 5)
+                                                                <span class="badge badge-secondary ml-2 mb-4"> Your Ticket is Marked as Complete</span>
+                                                                @else
                                                                 <label>Ticket Remarks</label>
                                                                 <textarea class="form-control" placeholder="Please Enter Detail" name="equipment_remarks" rows="2" value="" style="color: black" required></textarea>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>

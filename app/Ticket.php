@@ -32,10 +32,10 @@ class Ticket extends Model
     public function getTicketStatusAttribute() : string {
 
         $list = [
-            0 => '<span class="badge outline-badge-warning"> Unassigned </span>',
-            1 => '<span class="badge outline-badge-success"> Pending </span>',
-            2 => '<span class="badge outline-badge-success"> For Approval </span>',
-            3 => '<span class="badge outline-badge-success"> Completed Request </span>',
+            0 => '<span class="badge badge-warning"> Unassigned </span>',
+            1 => '<span class="badge badge-success"> Pending </span>',
+            2 => '<span class="badge badge-success"> For Approval </span>',
+            3 => '<span class="badge badge-success"> Completed Request </span>',
         ];
 
         return $list[$this->status];

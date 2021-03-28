@@ -64,6 +64,8 @@ Route::group(['prefix' => 'supervisor', 'as' => 'supervisor.', 'middleware' => [
 	Route::delete('/stafflist/store/{id}', $controller.'@destroy')->name('stafflist.destroy');
 
 	Route::get('/notify', $controller.'@notify')->name('notify');
+
+	Route::post('/notfiy/store', $controller.'@notifyStore')->name('notify.store');
 	
 });
 

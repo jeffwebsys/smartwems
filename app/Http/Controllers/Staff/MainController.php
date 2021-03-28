@@ -77,9 +77,7 @@ class MainController extends Controller
                     return $data->ticketuser['name'];
                 })
                 ->addColumn('status', function ($data) {
-                    if ($data->eqticket->status == 2):
-                        return '<span class="badge outline-badge-warning"> With Pending Request </span>';
-                    endif;
+                   return $data->TicketStatus;
                 })
                 ->addColumn('date', function ($data) {
                     $time = date('F j, Y, g:i a', strtotime($data->created_at));

@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Equipment;
+use App\User;
+use App\Ticket;
+use App\Notify;
+use App\PurchaseRequest;
 
 class HomeController extends Controller
 {
@@ -23,6 +28,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $equipment = Equipment::get();
+        $user = User::get();
+        $admin = User::role(1)->get();
+        $ticket = Ticket::get();
+        $ticketLatest = Ticket::limit(1)->latest()->get();
+        $ticketCompleted = Ticket::where('status', 3)->get();
+        $ticketPending = Ticket::where('status', 2)->get();
+        $maintenance = Notify::limit(2)->get();
+        $purchase = PurchaseRequest::get();
+        return view('home', compact('equipment','user','ticket','ticketCompleted','admin','ticketPending',
+        'ticketLatest','maintenance','purchase'));
     }
 }

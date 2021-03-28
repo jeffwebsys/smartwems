@@ -64,6 +64,14 @@ class MainController extends Controller
 
         return response()->json([$userTicket, $ticket, $equipment]);
     }
+    public function notifyStore(Request $request)
+    {
+        // dd($request->all());
+        $ticket = Ticket::where('id', $request->ticket_id)->update(['status' => 3]);
+        $equipment = Equipment::where('id', $request->equipment_id)->update(['status' => 5]);
+      
+        return back()->with('message','Ticket Completed');
+    }
     public function edit($id)
     {
         $user = Ticket::find($id);
@@ -76,7 +84,7 @@ class MainController extends Controller
         return response()->json(['success' => 'Provincial deleted successfully.']);
     }
     public function notify(){
-        $data = Notify::paginate(6);
+        $data = Notify::paginate(3);
         return view('supervisor.main.notify',compact('data'));
     }
 }
