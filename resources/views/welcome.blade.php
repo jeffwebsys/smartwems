@@ -3,10 +3,10 @@
 
 <head>
 
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Medila - Medical Treatment & Health Care Landing Page Template</title>
+    <title>San Jose - Smart Equipment</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -61,21 +61,24 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right navbar-contact">
                             <li>
-                                <a href="#"><span class="icon-call"></span> 1800 789 123</a>
+                                <a href="#"><span class="icon-call"></span> 911</a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
 
                             @if (Route::has('login'))
+                            @auth
                             <li class="dropdown mm-menu">
-                                @auth
-                                <a class="page-scroll" href="{{ url('/home') }}">Home</a>
+                                <a class="page-scroll" href="{{ url('/home') }}">dashboard</a>
+                            </li>
+                           
+                            @else
+                            <li class="dropdown mm-menu">
+                                <a class="page-scroll" href="{{ route('login') }}">Login</a>
                             </li>
                             @endauth
                             @endif
-                            <li class="dropdown mm-menu">
-                                <a class="page-scroll" href="#features">Features</a>
-                            </li>
+
 
                             <li class="dropdown mm-menu">
                                 <a class="page-scroll" href="#services">Services</a>
@@ -109,32 +112,34 @@
                             <div class="col-md-10">
                                 <ul class="features-list">
                                     <li>
-                                        <i class="ilmosys-microscope"></i>
+                                        <i class="ilmosys-book"></i>
                                         <h5>Equipment Inventory Support</h5>
                                     </li>
 
                                     <li>
-                                        <i class="ilmosys-x-ray"></i>
+                                        <i class="ilmosys-ticket"></i>
                                         <h5>Ticket Management</h5>
                                     </li>
 
                                     <li>
-                                        <i class="ilmosys-ambulance"></i>
+                                        <i class="ilmosys-dashboard"></i>
                                         <h5>Detailed Analytics</h5>
                                     </li>
 
                                     <li>
-                                        <i class="ilmosys-clinic"></i>
-                                        <h5>Ward/ Indoor facility</h5>
+                                        <i class="ilmosys-user"></i>
+                                        <h5>User Management</h5>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <br><br>
-                    <div class="col-sm-5 col-md-7">
+                  
+               
+                    {{-- <div class="col-sm-5 col-md-7">
                         <div class="intro-form" id="join-us-form contact-form">
-                            <h4>Sydney's #1 Medical Treatment Service Center.</h4>
+                            <h4>Smart QR</h4>
                             
                             <div id="join-us-results"></div>
                             
@@ -173,7 +178,9 @@
 						<p><i class="fa fa-warning"></i> Please complete all the fields in the form before sending.</p>
 					</div>
                             
-                        </div>
+                        </div> --}}
+                      
+                       
                     </div>
 
                 </div>
@@ -185,23 +192,23 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-3">
                         <div class="stats2-info">
-                            <i class="fa fa-users"></i>
+                            <i class="ilmosys-book"></i>
                             <p><span class="count">5500</span></p>
-                            <h2>Healthy Clients</h2>
+                            <h2>Registered Equipments</h2>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="stats2-info">
-                            <i class="ilmosys-doctor"></i>
+                            <i class="ilmosys-user"></i>
                             <p><span class="count">85</span></p>
-                            <h2>Proffesional Doctors</h2>
+                            <h2>Suppliers</h2>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="stats2-info">
                             <i class="ilmosys-ambulance"></i>
                             <p><span class="count">30</span></p>
-                            <h2>Ambulance</h2>
+                            <h2></h2>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
