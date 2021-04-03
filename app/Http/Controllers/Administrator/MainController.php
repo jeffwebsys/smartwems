@@ -6,11 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Notifications\AddedUser;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 use App\User;
+use App\EquipmentCategory;
+use App\EquipmentLocation;
 use DataTables;
 use Response;
 use Carbon\Carbon;
+
 
 class MainController extends Controller
 {
@@ -86,10 +92,22 @@ class MainController extends Controller
             $response['status'] = 'warning';
             $response['message'] = 'User already exist.';
         }
+        // Notify Admin
+        $userNotify = User::where('id', auth()->user()->id)->first();
+        $userNotify->notify(new AddedUser());
+        // Notify The user
+        Mail::to($user->email)->send(new WelcomeMail($user));
 
         return Response::json($response);
 
         
+    }
+    public function settings(){
+
+        $equipmentCategory = EquipmentCategory::all();
+        $equipmentLocation = EquipmentLocation::all();
+
+        return view('administrator.main.settings',compact('equipmentCategory','equipmentLocation'));
     }
     public function edit($id)
     {

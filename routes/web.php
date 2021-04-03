@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +12,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/email', function () {
+
+// 	Mail::to('email@email.com')->send(new WelcomeMail());
+
+//     return new WelcomeMail();
+// });
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Auth::routes();
 
@@ -44,6 +51,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
 	Route::get('/users/{id}/edit', $controller.'@edit')->name('edit.users');
 	Route::post('/users/store', $controller.'@store')->name('users.store');
 	Route::delete('/users/store/{id}', $controller.'@destroy')->name('users.destroy');
+
+	Route::get('/settings', $controller.'@settings')->name('settings');
 	
 });
 
@@ -145,10 +154,10 @@ Route::group(['prefix' => 'supplyofficer', 'as' => 'supplyofficer.', 'middleware
 	Route::post('/procurement/store', $controller.'@procurementStore')->name('procurement.store');
 
 	Route::get('/reports', $controller.'@reports')->name('reports');
-
+	Route::get('/equipmentview/{id}', $controller.'@equipmentView')->name('equipmentView');
 	Route::post('/print/pdf', $controller.'@printPdf')->name('printPdf');
 
-	Route::get('/equipmentview/{id}', $controller.'@equipmentView')->name('equipmentView');
+	Route::post('/printqr/qr', $controller.'@printQr')->name('printQr');
 	
 });
 

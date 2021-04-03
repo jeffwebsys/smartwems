@@ -5,6 +5,8 @@ namespace App\Http\Controllers\SupplyOfficer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Notifications\AddEquipment;
+
 
 use App\User;
 use App\Equipment;
@@ -175,6 +177,23 @@ class MainController extends Controller
 
         }
     }
+    public function printQr(Request $request)
+    {
+        $url = url("equipmentview/$request->equipment_id");
+        $equipment = Equipment::find($request->equipment_id);
+        $qrcode = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate($url));
+       
+        if ($equipment) {
+        
+            $pdf = PDF::loadView('equip-form', compact('equipment','qrcode'));
+            return $pdf->stream(); 
+
+        } else {
+
+            return redirect()->route('home');
+
+        }
+    }
     public function store(Request $request)
     {
         $data = $this->validatedForm();
@@ -207,6 +226,9 @@ class MainController extends Controller
             $response['status'] = 'warning';
             $response['message'] = 'User already exist.';
         }
+        
+        $userNotify = User::where('id', auth()->user()->id)->first();
+        $userNotify->notify(new AddEquipment($user));
 
         return Response::json($response);
     }
