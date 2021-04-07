@@ -20,6 +20,7 @@ class WelcomeMail extends Mailable
     public function __construct($user)
     {
         //
+       
         $this->user = $user;
         
     }
@@ -31,9 +32,10 @@ class WelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.welcome') ->with([
+        return $this->markdown('emails.welcome')
+        ->with([
             'username'     => $this->user->name, //this works without queue
             'email'     => $this->user->email, //this works without queue
-        ]);;
+        ]);
     }
 }

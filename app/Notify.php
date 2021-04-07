@@ -42,5 +42,17 @@ class Notify extends Model
         return $list[$this->status];
 
     }
+    public function getTrackStatusAttribute() : string {
+
+        $test = [
+            0 => '<p>Your ticket is still unassigned</p>',
+            1 => '<p>Your ticket has been picked up by maintenance personnel</p>',
+            2 => '<p>Your ticket has been sent and waiting for approval</p>',
+            3 => '<p>Your ticket is completed!</p>',
+        ];
+
+        return $test[$this->status];
+
+    }
 
 }

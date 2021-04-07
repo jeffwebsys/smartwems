@@ -87,7 +87,7 @@
 								@endforeach
 							</select>
 							<br><label for="unit_cost">Unit Cost</label>
-						  <input type="text" class="form-control" id="unit_cost" name="unit_cost" value="" required>
+						  <input type="number" class="form-control" id="unit_cost" name="unit_cost" value="" required>
 						  <br><label for="unit_cost">Responsible Personnel</label>
 						  <input type="text" class="form-control" id="res_personnel" name="res_personnel" value="" required>
 						  <br><label for="remarks">Remarks</label>
@@ -171,7 +171,7 @@
 								@endforeach
 							</select>
 							<br><label for="unit_cost">Unit Cost</label>
-						  <input type="text" class="form-control" id="edit_unit_cost" name="unit_cost" value="" required>
+						  <input type="number" class="form-control" id="edit_unit_cost" name="unit_cost" value="" required>
 						  <br><label for="unit_cost">Responsible Personnel</label>
 						  <input type="text" class="form-control" id="edit_res_personnel" name="res_personnel" value="" required>
 						  <br><label for="remarks">Remarks</label>

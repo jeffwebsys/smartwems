@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\User;
+use App\Notify;
 use App\Ticket;
 use App\Equipment;
 use App\EquipmentCategory;
@@ -89,6 +91,25 @@ class MainController extends Controller
         }
 
         return view('staff.main.servicelist')->with('data');
+    }
+    public function track(Request $request)
+    {
+        
+        // $notify = Notify::where('ticket_id', $request->ticket_id)->get();
+
+        return view('staff.main.track');
+    }
+    public function trackStore(Request $request)
+    {   
+        // $who = Notify::findOrFail($request->ticket_id);
+        try {
+            $notify = Ticket::findOrFail($request->ticket_id);
+        } catch (ModelNotFoundException $e) {
+            return back()->withError('Ticket ID: '.$request->ticket_id.' Not Found!')->withInput();
+        }
+
+        return view('staff.main.search', compact('notify'));
+       
     }
     public function submitTicket(Request $request)
     {

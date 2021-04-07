@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,13 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/email', function () {
 
-// Route::get('/email', function () {
+	Mail::to('darksil3nt17@gmail.com')->send(new WelcomeMail());
 
-// 	Mail::to('email@email.com')->send(new WelcomeMail());
-
-//     return new WelcomeMail();
-// });
+    return new WelcomeMail();
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,6 +55,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
 	Route::delete('/users/store/{id}', $controller.'@destroy')->name('users.destroy');
 
 	Route::get('/settings', $controller.'@settings')->name('settings');
+
+	Route::post('/settings/store', $controller.'@settingsStore')->name('settingsStore');
 	
 });
 
@@ -130,6 +134,9 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['App\Http\
 	Route::get('/equipmentview/{id}', $controller.'@equipmentView')->name('equipmentView');
 	Route::post('/ticket/store', $controller.'@submitTicket')->name('submitTicket');
 	Route::post('/print/pdf', $controller.'@printPdf')->name('printPdf');
+
+	Route::get('/track', $controller.'@track')->name('track');
+	Route::post('/track/store', $controller.'@trackStore')->name('trackStore');
 });
 
 // Supply Officer

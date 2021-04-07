@@ -130,7 +130,7 @@
                         <div class="col" id="equip_name">Equipment Name</div>
                         <div class="col" id="reason">Description</div>
                         <div class="col"><input type="text" name="remarks" class="form-control" id="remarks" required></div>
-                        <div class="col"><input type="text" name="budget" class="form-control" id="budget" required></div>
+                        <div class="col"><input type="number" name="budget" class="form-control" id="budget" required></div>
                     </div>
 
 

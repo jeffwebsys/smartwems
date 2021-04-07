@@ -17,14 +17,15 @@ use DataTables;
 use Response;
 use Carbon\Carbon;
 
-
 class MainController extends Controller
 {
     //
     public function users(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::whereNotIn('user_type', array(1))->latest()->get();
+            $data = User::whereNotIn('user_type', [1])
+                ->latest()
+                ->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 // ->addColumn('id', function($data){
@@ -38,11 +39,11 @@ class MainController extends Controller
                         return 'Supervisor';
                     } elseif ($data->user_type == 3) {
                         return 'Maintenance Staff';
-                    }elseif ($data->user_type == 4) {
+                    } elseif ($data->user_type == 4) {
                         return 'Staff';
-                    }elseif ($data->user_type == 5) {
+                    } elseif ($data->user_type == 5) {
                         return 'Supply Officer';
-                    }elseif ($data->user_type == 6) {
+                    } elseif ($data->user_type == 6) {
                         return 'Supplier';
                     } else {
                         return 'Staff';
@@ -79,16 +80,12 @@ class MainController extends Controller
         $banned = Carbon::now()->addDays($date);
         $password = $request->password;
         $hashed = Hash::make($password);
-        $user = User::updateOrCreate(['id' => $request->user_id], ['name' => $request->name, 'password' => $hashed, 'email' => $request->email, 
-        'banned_until' => ($date == 0) ? NULL : $banned , 'user_type' => $request->user_type]);
-        
-        if($user->wasRecentlyCreated){
-        
+        $user = User::updateOrCreate(['id' => $request->user_id], ['name' => $request->name, 'password' => $hashed, 'email' => $request->email, 'banned_until' => $date == 0 ? null : $banned, 'user_type' => $request->user_type]);
+
+        if ($user->wasRecentlyCreated) {
             $response['status'] = 'success';
             $response['message'] = 'Data saved.';
-
         } else {
-            
             $response['status'] = 'warning';
             $response['message'] = 'User already exist.';
         }
@@ -99,15 +96,33 @@ class MainController extends Controller
         Mail::to($user->email)->send(new WelcomeMail($user));
 
         return Response::json($response);
-
-        
     }
-    public function settings(){
-
+    public function settings()
+    {
         $equipmentCategory = EquipmentCategory::all();
         $equipmentLocation = EquipmentLocation::all();
 
-        return view('administrator.main.settings',compact('equipmentCategory','equipmentLocation'));
+        return view('administrator.main.settings', compact('equipmentCategory', 'equipmentLocation'));
+    }
+    public function settingsStore(Request $request)
+    {
+        if ($request->category_type == 1) {
+            $eq = EquipmentCategory::create(
+                $request->validate([
+                    'title' => 'required',
+                    'description' => 'required',
+                ])
+            );
+        } else {
+            $eq = EquipmentLocation::create(
+                $request->validate([
+                    'title' => 'required',
+                    'description' => 'required',
+                ])
+            );
+        }
+
+        return back()->with(['message' => 'Category Added Successfully.', 'error' => 'Error']);
     }
     public function edit($id)
     {
@@ -117,7 +132,7 @@ class MainController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-     
-        return response()->json(['success'=>'Provincial deleted successfully.']);
+
+        return response()->json(['success' => 'deleted successfully.']);
     }
 }

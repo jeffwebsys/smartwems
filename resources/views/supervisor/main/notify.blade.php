@@ -6,12 +6,13 @@
     <div class="row analytics">
             @foreach($data as $ticket)
                     <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12 layout-spacing">
+                        @if(Session::has('message'))
+                        <span class="badge badge-secondary ml-2 mb-4"> {{ Session::get('message') }} </span>
+                        @endif
+
                         <div class="widget widget-card-one">
                             <div class="widget-content">
-                                @if(Session::has('message'))
-                                <span class="badge badge-secondary ml-2 mb-4"> {{ Session::get('message') }} </span>
-                                @endif
-
+                               
                                 <div class="media">
                                     <form id="complete" action="{{ route('supervisor.notify.store')}}" method="POST">
                                     @csrf
