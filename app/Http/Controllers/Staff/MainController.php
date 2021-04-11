@@ -18,7 +18,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MainController extends Controller
 {
-       public function equipment(Request $request)
+    public function equipment(Request $request)
     {
         $equip = Equipment::get();
         $equipment = EquipmentCategory::get();
@@ -31,10 +31,10 @@ class MainController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('item_name', function ($data) {
-                    return '<a href="'. route('staff.equipmentView', $data->id) .'">'.$data->item_name.'</a>';
+                    return '<a href="' . route('staff.equipmentView', $data->id) . '">' . $data->item_name . '</a>';
                 })
                 ->addColumn('item_description', function ($data) {
-                  return $data->item_description;
+                    return $data->item_description;
                 })
                 ->addColumn('ac_date', function ($data) {
                     $time = $data->ac_date;
@@ -47,7 +47,6 @@ class MainController extends Controller
                     return $data->serial_no;
                 })
                 ->addColumn('status', function ($data) {
-
                     return $data->EquipmentStatus;
                 })
 
@@ -79,7 +78,7 @@ class MainController extends Controller
                     return $data->ticketuser['name'];
                 })
                 ->addColumn('status', function ($data) {
-                   return $data->TicketStatus;
+                    return $data->TicketStatus;
                 })
                 ->addColumn('date', function ($data) {
                     $time = date('F j, Y, g:i a', strtotime($data->created_at));
@@ -94,78 +93,65 @@ class MainController extends Controller
     }
     public function track(Request $request)
     {
-        
         // $notify = Notify::where('ticket_id', $request->ticket_id)->get();
 
         return view('staff.main.track');
     }
     public function trackStore(Request $request)
-    {   
+    {
         // $who = Notify::findOrFail($request->ticket_id);
         try {
             $notify = Ticket::findOrFail($request->ticket_id);
         } catch (ModelNotFoundException $e) {
-            return back()->withError('Ticket ID: '.$request->ticket_id.' Not Found!')->withInput();
+            return back()
+                ->withError('Ticket ID: ' . $request->ticket_id . ' Not Found!')
+                ->withInput();
         }
 
         return view('staff.main.search', compact('notify'));
-       
     }
     public function submitTicket(Request $request)
     {
-        $ticket = Ticket::updateOrCreate([
-            'equipment_id' => $request->equipment_id],
-            ['staff_id' => auth()->user()->id,
-            'name' => 'Logged Ticket',
-            'reason' => $request->equipment_remarks,
-            'status' => 0,
-        ]);
+        $ticket = Ticket::updateOrCreate(
+            [
+                'equipment_id' => $request->equipment_id,
+            ],
+            ['staff_id' => auth()->user()->id, 'name' => 'Logged Ticket', 'reason' => $request->equipment_remarks, 'status' => 0]
+        );
 
         Equipment::where('id', $request->equipment_id)->update(['status' => 2]);
 
-        return back()->with('message','Request Submitted Successfully.');
+        return back()->with('message', 'Request Submitted Successfully.');
     }
     public function printPdf(Request $request)
     {
         $purchase = PurchaseRequest::updateOrCreate(
-
             ['procurement_id' => $request->pro_id],
-            ['user_id' => $request->user_id,
-            'equipment_id' => $request->eqid,
-            'ticket_id' => $request->ticket_id,
-            'remarks' => $request->remarks,
-            'budget' => $request->budget,
-            'approved_by' => auth()->user()->name ] );
+            ['user_id' => $request->user_id, 'equipment_id' => $request->eqid, 'ticket_id' => $request->ticket_id, 'remarks' => $request->remarks, 'budget' => $request->budget, 'approved_by' => auth()->user()->name]
+        );
 
-       
         if ($purchase) {
-        
-            
             $pdf = PDF::loadView('stub-form', compact('purchase'));
-            return $pdf->stream(); 
-
+            return $pdf->stream();
         } else {
-
             return redirect()->route('home');
-
         }
     }
     public function openticket(Request $request)
     {
-        $ticket = Ticket::updateOrCreate([
-            'equipment_id' => $request->item2],
-            ['staff_id' => auth()->user()->id,
-            'name' => 'Logged Ticket',
-            'reason' => $request->item4,
-            'status' => 0,
-        ]);
+        $ticket = Ticket::updateOrCreate(
+            [
+                'equipment_id' => $request->item2,
+            ],
+            ['staff_id' => auth()->user()->id, 'name' => 'Logged Ticket', 'reason' => $request->item4, 'status' => 0]
+        );
 
         Equipment::where('id', $request->item2)->update(['status' => 2]);
     }
-     public function equipmentView($id)
+    public function equipmentView($id)
     {
         $equipment = Equipment::findOrFail($id);
-        return view('staff.main.equipmentview',compact('equipment'));
+        return view('staff.main.equipmentview', compact('equipment'));
     }
     public function edit($id)
     {

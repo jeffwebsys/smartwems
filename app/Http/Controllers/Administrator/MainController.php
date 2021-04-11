@@ -11,6 +11,7 @@ use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
 
 use App\User;
+use App\Equipment;
 use App\EquipmentCategory;
 use App\EquipmentLocation;
 use DataTables;
@@ -72,6 +73,49 @@ class MainController extends Controller
         }
 
         return view('administrator.main.users')->with('data');
+    }
+    public function equipment(Request $request)
+    {
+        $equip = Equipment::get();
+        $equipment = EquipmentCategory::get();
+        $locations = EquipmentLocation::get();
+
+        if ($request->ajax()) {
+            $data = Equipment::get();
+
+            // $sql = array([$data,$equipment]);
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('item_name', function ($data) {
+                    return '<a href="' . route('admin.equipmentView', $data->id) . '">' . $data->item_name . '</a>';
+                })
+                ->addColumn('item_description', function ($data) {
+                    return $data->item_description;
+                })
+                ->addColumn('ac_date', function ($data) {
+                    $time = $data->ac_date;
+                    return $time;
+                })
+                ->addColumn('model_no', function ($data) {
+                    return $data->model_no;
+                })
+                ->addColumn('serial_no', function ($data) {
+                    return $data->serial_no;
+                })
+                ->addColumn('status', function ($data) {
+                    return $data->EquipmentStatus;
+                })
+
+                ->rawColumns(['item_name', 'item_description', 'ac_date', 'model_no', 'serial_no', 'status', 'action'])
+                ->make(true);
+        }
+
+        return view('administrator.main.equipment', compact('equipment', 'locations', 'equip'));
+    }
+    public function equipmentView($id)
+    {
+        $equipment = Equipment::findOrFail($id);
+        return view('administrator.main.equipmentview', compact('equipment'));
     }
 
     public function store(Request $request)

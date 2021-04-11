@@ -55,8 +55,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
 	Route::delete('/users/store/{id}', $controller.'@destroy')->name('users.destroy');
 
 	Route::get('/settings', $controller.'@settings')->name('settings');
-
 	Route::post('/settings/store', $controller.'@settingsStore')->name('settingsStore');
+
+	Route::get('/equipment', $controller.'@equipment')->name('equipment');
+	Route::get('/equipmentview/{id}', $controller.'@equipmentView')->name('equipmentView');
 	
 });
 
@@ -165,6 +167,9 @@ Route::group(['prefix' => 'supplyofficer', 'as' => 'supplyofficer.', 'middleware
 	Route::post('/print/pdf', $controller.'@printPdf')->name('printPdf');
 
 	Route::post('/printqr/qr', $controller.'@printQr')->name('printQr');
+
+	Route::get('/assets', $controller.'@assets')->name('assets');
+	Route::post('/assets/report', $controller.'@assetsStore')->name('assetsStore');
 	
 });
 

@@ -65,9 +65,8 @@
                            
                         </div>
                         <div class="col-md-6 mb-4">
-                            <label for="usertype">User Type</label>
+                            <label for="usertype">Account Type</label>
                             <select class="form-control" name="user_type">
-                                <option value="1">Administrator</option>
                                 <option value="2">Supervisor</option>
                                 <option value="3">Maintenance Staff</option>
                                 <option value="4">Staff</option>

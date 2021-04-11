@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Notifications\AddEquipment;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 use App\User;
@@ -193,6 +194,24 @@ class MainController extends Controller
             return redirect()->route('home');
 
         }
+    }
+    public function assets(Request $request)
+    {
+       
+        return view('supplyofficer.main.assetsview');
+    }
+    public function assetsStore(Request $request)
+    {
+        // $who = Notify::findOrFail($request->ticket_id);
+        try {
+            $equipment = Equipment::findOrFail($request->equipment_id);
+        } catch (ModelNotFoundException $e) {
+            return back()
+                ->withError('Equipment ID: ' . $request->equipment_id . ' Not Found!')
+                ->withInput();
+        }
+
+        return view('supplyofficer.main.assets', compact('equipment'));
     }
     public function store(Request $request)
     {

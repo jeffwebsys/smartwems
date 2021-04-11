@@ -40,6 +40,9 @@ class Equipment extends Model
     public function equipmentTicket() {
         return $this->hasOne(Ticket::class);
     }
+    public function purchaseBudget() {
+        return $this->hasOne(PurchaseRequest::class);
+    }
 
      public function getTicketStatusAttribute() : string {
 
