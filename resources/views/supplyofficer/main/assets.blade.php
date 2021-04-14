@@ -44,22 +44,26 @@
                 <div class="form-row mb-4">
                     <div class="form-group col-md-6">
                         <label for="equipment_name">Depreciation Value/Year</label>
-                        <input type="number" class="form-control" id="d_value" name="d_value" placeholder="Enter Salvage Value" />
+                        <input type="number" class="form-control" id="d_value" name="d_value" placeholder="" disabled style="color: black">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Total Repair - Service Cost</label>
-                        <input type="text" class="form-control" id="t_value" name="t_value" value="{{ $equipment->purchaseBudget->budget ?? "No records at the moment" }}"/ disabled style="color: black">
+                        <input type="text" class="form-control" id="t_value" name="t_value" value="{{ $equipment->purchaseBudget->budget ?? "No records at the moment" }} "disabled style="color: black">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Year To Year Depreciation Value</label>
+                        <p id="tx1" style="color: black; font-weight: 700;"></p>
+                       
+                    </div>
+                    <div class="form-group col-md-6">
+                   
+                                <input type="text" id="tx2" hidden>
+                                <button type="submit" class="btn btn-primary mt-3">Print Report</button>
+                            
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-check pl-0">
-                        <div class="custom-control custom-checkbox checkbox-info">
-                            <input type="checkbox" class="custom-control-input" id="gridCheck" />
-                            <label class="custom-control-label" for="gridCheck">Check me out</label>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+              
+              
             </form>
         </div>
     </div>
@@ -82,7 +86,20 @@
         let ac_cost = parseInt($("#ac_cost").val());
         let sv_value = parseInt($("#sv_value").val());
         let sv_life = parseInt($("#sv_life").val());
-        $("#d_value").val(((ac_cost - sv_value) / sv_life ? (ac_cost - sv_value) / sv_life : 0).toFixed(2));
+
+        $("#d_value").val(((ac_cost - sv_value) / sv_life ? (ac_cost - sv_value) / sv_life : 0));
+        let test = $('#tx2').val(ac_cost - parseInt($("#d_value").val()));
+       
+        let text = "";
+        let dc =  $("#d_value").val(); 
+        let t = ac_cost - dc;
+        let i;
+        for (i = 0; i < sv_life; i++, t -= dc) {
+
+        text += "Year " + (i + 1) + " - " + parseFloat(t.toFixed(2)) +" Php<br>";
+        }
+        $('#tx1').html(text);
+        
     });
 });
 
