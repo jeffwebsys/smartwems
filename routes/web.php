@@ -81,6 +81,11 @@ Route::group(['prefix' => 'supervisor', 'as' => 'supervisor.', 'middleware' => [
 	Route::get('/notify', $controller.'@notify')->name('notify');
 
 	Route::post('/notfiy/store', $controller.'@notifyStore')->name('notify.store');
+
+	Route::get('/assets', $controller.'@assets')->name('assets');
+	Route::post('/assets/report', $controller.'@assetsStore')->name('assetsStore');
+
+	Route::post('/print/report', $controller.'@printReport')->name('printReport');
 	
 });
 

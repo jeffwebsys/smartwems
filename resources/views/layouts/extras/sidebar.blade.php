@@ -68,28 +68,19 @@
              <li class="menu">
                 <a href="{{ route('supervisor.notify') }}" {{ request()->routeIs('supervisor.notify') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                         <span style="font-size: 12px;">Ticket Update</span>
                     </div>
                 </a>
             </li>
-             <li class="menu">
-                        <a href="{{ route('admin.account') }}" {{ request()->routeIs('admin.account') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle collapsed">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                                <span style="font-size: 12px;">Reports</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="submenu list-unstyled collapse show" id="elements" data-parent="#accordionExample" style=""> 
-                            <li>
-                                <a href="element_alerts.html"> Assets Depreciation </a>
-                            </li>
-                           
-                        </ul>
-                    </li>
+            <li class="menu">
+                <a href="{{ route('supervisor.assets') }}" {{ request()->routeIs('supervisor.assets') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        <span style="font-size: 12px;">Asset Reports</span>
+                    </div>
+                </a>
+            </li>
                 <!-- Maintenance Staff -->
             @elseif(auth()->user()->user_type == 3)
             <li class="menu">

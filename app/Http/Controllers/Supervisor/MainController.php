@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Supervisor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
+use PDF;
 use App\User;
 use App\Equipment;
 use App\Ticket;
@@ -71,6 +74,43 @@ class MainController extends Controller
         $equipment = Equipment::where('id', $request->equipment_id)->update(['status' => 5]);
       
         return back()->with('message','Ticket Completed');
+    }
+     public function printReport(Request $request)
+    {
+        $ac =  $request->ac_cost;
+        $sl =  $request->sv_life;
+        $sv =  $request->sv_value;
+        $dv =  $request->d_value;
+        $url = url("equipmentview/$request->equipment_id");
+        $equipment = Equipment::find($request->equipment_id);
+        $qrcode = base64_encode(QrCode::format('svg')
+            ->size(200)
+            ->errorCorrection('H')
+            ->generate($url));
+        if ($equipment) {
+            $pdf = PDF::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
+            return $pdf->stream(); 
+        } else {
+            return redirect()->route('home');
+        }
+    }
+    public function assets(Request $request)
+    {
+       
+        return view('supervisor.main.assetsview');
+    }
+    public function assetsStore(Request $request)
+    {
+        // $who = Notify::findOrFail($request->ticket_id);
+        try {
+            $equipment = Equipment::findOrFail($request->equipment_id);
+        } catch (ModelNotFoundException $e) {
+            return back()
+                ->withError('Equipment ID: ' . $request->equipment_id . ' Not Found!')
+                ->withInput();
+        }
+
+        return view('supervisor.main.assets', compact('equipment'));
     }
     public function edit($id)
     {
