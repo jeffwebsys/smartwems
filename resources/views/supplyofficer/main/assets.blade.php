@@ -20,25 +20,27 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
 
-            <form>
+            <form id="userForm" name="userForm" class="simple-example" action="{{ route('supplyofficer.printReport') }}" method="POST" required>
+                @csrf
                 <div class="form-row mb-4">
                     <div class="form-group col-md-6">
                         <label for="equipment_name">Equipment Name</label>
+                        <input type="text" class="form-control" id="equipment_id" name="equipment_id" value="{{ $equipment->id }}" hidden>
                         <input type="text" class="form-control" id="equipment_name" name="equipment_name" value="{{ $equipment->item_name }}" />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Service Life Years</label>
-                        <input type="number" class="form-control" id="sv_life" name="sv_life" placeholder="Enter Years" min="1" max="10"/>
+                        <input type="number" class="form-control" id="sv_life" name="sv_life" placeholder="Enter Years" min="1" max="10" required/>
                     </div>
                 </div>
                 <div class="form-row mb-4">
                     <div class="form-group col-md-6">
                         <label for="equipment_name">Salvage Value</label>
-                        <input type="number" class="form-control" id="sv_value" name="sv_value" placeholder="Enter Salvage Value" />
+                        <input type="number" class="form-control" id="sv_value" name="sv_value" placeholder="Enter Salvage Value" required/>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Equipment Acquisition Cost</label>
-                        <input type="number" class="form-control" id="ac_cost" name="ac_cost" value="{{ $equipment->unit_cost }}" disabled style="color: black;" />
+                        <input type="number" class="form-control" id="ac_cost" name="ac_cost" value="{{ $equipment->unit_cost }}" style="color: black;" />
                     </div>
                 </div>
                 <div class="form-row mb-4">
@@ -57,7 +59,7 @@
                     </div>
                     <div class="form-group col-md-6">
                    
-                                <input type="text" id="tx2" hidden>
+                                <input type="text" id="tx2" name="report" hidden>
                                 <button type="submit" class="btn btn-primary mt-3">Print Report</button>
                             
                     </div>
@@ -98,8 +100,8 @@
 
         text += "Year " + (i + 1) + " - " + parseFloat(t.toFixed(2)) +" Php<br>";
         }
-        $('#tx1').html(text);
-        
+       let report =  $('#tx1').html(text);
+       
     });
 });
 

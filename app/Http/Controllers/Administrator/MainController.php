@@ -134,10 +134,10 @@ class MainController extends Controller
             $response['message'] = 'User already exist.';
         }
         // Notify Admin
-        $userNotify = User::where('id', auth()->user()->id)->first();
-        $userNotify->notify(new AddedUser());
+        // $userNotify = User::where('id', auth()->user()->id)->first();
+        // $userNotify->notify(new AddedUser());
         // Notify The user
-        Mail::to($user->email)->send(new WelcomeMail($user));
+        // Mail::to($user->email)->send(new WelcomeMail($user));
 
         return Response::json($response);
     }

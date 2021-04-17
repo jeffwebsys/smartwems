@@ -195,6 +195,25 @@ class MainController extends Controller
 
         }
     }
+    public function printReport(Request $request)
+    {
+        $ac =  $request->ac_cost;
+        $sl =  $request->sv_life;
+        $sv =  $request->sv_value;
+        $dv =  $request->d_value;
+        $url = url("equipmentview/$request->equipment_id");
+        $equipment = Equipment::find($request->equipment_id);
+        $qrcode = base64_encode(QrCode::format('svg')
+            ->size(200)
+            ->errorCorrection('H')
+            ->generate($url));
+        if ($equipment) {
+            $pdf = PDF::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
+            return $pdf->stream(); 
+        } else {
+            return redirect()->route('home');
+        }
+    }
     public function assets(Request $request)
     {
        
@@ -246,8 +265,8 @@ class MainController extends Controller
             $response['message'] = 'User already exist.';
         }
         
-        $userNotify = User::where('id', auth()->user()->id)->first();
-        $userNotify->notify(new AddEquipment($user));
+        // $userNotify = User::where('id', auth()->user()->id)->first();
+        // $userNotify->notify(new AddEquipment($user));
 
         return Response::json($response);
     }

@@ -107,7 +107,7 @@
                 <div class="row center-content">
                     <div class="col-sm-10">
                         <h2>Equipment QR Scanner<br>Integration</h2>
-                        <p>Lorem ipsum dolor sit amet consec tetur elit amet voluptas accusamus <br>dolorum veritatis ea odio dolor emque.</p>
+                        <p style="font-weight: 800">Our commitment is to provide first class quality healthcare service to the underprivileged class of the city and adjacent localities. </p>
                         <div class="row">
                             <div class="col-md-10">
                                 <ul class="features-list">
@@ -207,8 +207,8 @@
                     <div class="col-md-3 col-sm-3">
                         <div class="stats2-info">
                             <i class="ilmosys-ambulance"></i>
-                            <p><span class="count">30</span></p>
-                            <h2></h2>
+                            <p><span class="count">1</span></p>
+                            <h2>Smart Health Care Facility</h2>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
@@ -228,8 +228,8 @@
         <div id="features" class="container">
             <div class="about-inline text-center">
                 <div class="container">
-                    <p>- FEATURES -</p>
-                    <h3>Check out some of our professional<br> features! </h3>
+                    <p>- OLSJ -</p>
+                    <h3>OLSJ Mission and Values</h3>
                 </div>
             </div>
 
@@ -242,13 +242,11 @@
                             <img src="{{ asset('landing/images/services/2.jpg') }}" class="pull-right img-responsive" alt="">
                         </div>
                         <div class="col-md-4">
-                            <h3>The Perfect Template for Medical. </h3>
+                            <h3>OLSJ MISSION</h3>
                             <ul class="list">
-                                <li><i class="icon-check"></i> Nunc quis justo sed odio scelerisque.</li>
-                                <li><i class="icon-check"></i> Duis tristique lorem non risus dignissim.</li>
-                                <li><i class="icon-check"></i>Vivamus accumsan sem sit amet.</li>
-                                <li><i class="icon-check"></i>Morbi sed orci a tortor bibendum finibus vitae.</li>
-                                <li><i class="icon-check"></i>Nam sed sem quis nisi faucibus tempor.</li>
+                                <li><i class="icon-check"></i>Our commitment is to provide first class quality healthcare service to the underprivileged class of the city and adjacent localities.
+</li>
+                               
                             </ul>
                             <div class="space30"></div>
                             <a href="#" class="btn btn-lg btn-primary">Learn More <i class="icon-arrow-right"></i></a>
@@ -264,13 +262,10 @@
                 <div class="container">
                     <div class="row center-content">
                         <div class="col-md-4">
-                            <h3>Watch youtube video and get details of our center. </h3>
+                            <h3>OLSJ VISION</h3>
                             <ul class="list">
-                                <li><i class="icon-check"></i> Nunc quis justo sed odio scelerisque.</li>
-                                <li><i class="icon-check"></i> Duis tristique lorem non risus dignissim.</li>
-                                <li><i class="icon-check"></i>Vivamus accumsan sem sit amet.</li>
-                                <li><i class="icon-check"></i>Morbi sed orci a tortor bibendum finibus vitae.</li>
-                                <li><i class="icon-check"></i>Nam sed sem quis nisi faucibus tempor.</li>
+                                <li><i class="icon-check"></i> Ospital ng Lungsod ng San Jose will be recognized as the leading service-oriented local government hospital in the country, a paradigm in quality healthcare with state of the art facilities.
+</li>
                             </ul>
                             <div class="space30"></div>
                             <a href="#" class="btn btn-lg btn-primary">Learn More <i class="icon-arrow-right"></i></a>
@@ -293,7 +288,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Honesty is the best policy.</h3>
+                        <h3>OLSJ Perfect Care.</h3>
                         <div class="space10"></div>
                         <p>We communicate honestly. No hidden fees, no surprises, no upsells! Only honest work and trustworthy staff.</p>
                     </div>
@@ -306,8 +301,8 @@
             <div class="container">
 
                 <div class="about-inline text-center">
-                    <p>- SERVICES -</p>
-                    <h3>Our Medical Service </h3>
+                    <p>-CORE VALUES -</p>
+                    <h3> CORE VALUES </h3>
                     <p>We're different from typical health checkup center. We're out to create magic. The goal is to WOW you with outstanding treatment.</p>
                 </div>
 
@@ -315,62 +310,32 @@
                     <div class="col-md-3">
                         <div class="service-content">
                             <i class="ilmosys-astronaut"></i>
-                            <h4>Robotic Surgery</h4>
-                            <p>Lorem ipsum dolor sit amet elit convallis neque convallis est non turpis nisl ac justo rutrum sollic itudin urna interdum.</p>
+                            <h4>SERVICE</h4>
+                            <p>To deliver competent, dedicated and compassionate medical service to the public</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="service-content">
                             <i class="ilmosys-women"></i>
-                            <h4>Women’s Care</h4>
-                            <p>Lorem ipsum dolor sit amet elit convallis neque convallis est non turpis nisl ac justo rutrum sollic itudin urna interdum.</p>
+                            <h4>EFFICIENCY</h4>
+                            <p>To adapt to the advancement in medical technology to aid in the delivery of fast and reliable medical service</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="service-content">
                             <i class="ilmosys-virus-2"></i>
-                            <h4>Cancer Services</h4>
-                            <p>Lorem ipsum dolor sit amet elit convallis neque convallis est non turpis nisl ac justo rutrum sollic itudin urna interdum.</p>
+                            <h4>FLEXIBILITY</h4>
+                            <p>To work independently and in partnership with other organization and ensure the sustainability of the service and
+</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="service-content">
                             <i class="ilmosys-first-aid"></i>
-                            <h4>Emergency Services</h4>
-                            <p>Lorem ipsum dolor sit amet elit convallis neque convallis est non turpis nisl ac justo rutrum sollic itudin urna interdum.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="space50"></div>
-                        <div class="service-content">
-                            <i class="ilmosys-medicine-2"></i>
-                            <h4>Wellness Center</h4>
-                            <p>Lorem ipsum dolor sit amet elit convallis neque convallis est non turpis nisl ac justo rutrum sollic itudin urna interdum.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="space50"></div>
-                        <div class="service-content">
-                            <i class="ilmosys-hospital-2"></i>
-                            <h4>Orthopaedic & Spine Institute</h4>
-                            <p>Lorem ipsum dolor sit amet elit convallis neque convallis est non turpis nisl ac justo rutrum sollic itudin urna interdum.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="space50"></div>
-                        <div class="service-content">
-                            <i class="ilmosys-brain-3"></i>
-                            <h4>Barin Checkup</h4>
-                            <p>Lorem ipsum dolor sit amet elit convallis neque convallis est non turpis nisl ac justo rutrum sollic itudin urna interdum.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="space50"></div>
-                        <div class="service-content">
-                            <i class="ilmosys-heart"></i>
-                            <h4>Heart Care Services</h4>
-                            <p>Lorem ipsum dolor sit amet elit convallis neque convallis est non turpis nisl ac justo rutrum sollic itudin urna interdum.</p>
+                            <h4>EXCELLENCE</h4>
+                            <p>To continuously update, disseminate, train and apply new health information as an advocate for the quest for excellence in health
+ 
+</p>
                         </div>
                     </div>
                 </div>
@@ -380,44 +345,7 @@
 
 
         <!-- TESTIMONIALS -->
-        <div id="reviews">
-
-            <div class="container">
-                <div class="about-inline text-center">
-                    <p>- REVIEWS -</p>
-                    <h3>Read what our past patients said <br> about our medical center. </h3>
-                </div>
-
-                <!-- TESTIMONIALS -->
-                <div class="testimonials-white">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <div class="quote2">
-                                <div>
-                                    <i class="icon2-bubble"></i>
-                                    <p>From the telephone appointment system to seeing a GP, my experience has been flawless. All the team from reception, telephone and nursing staff are polite, thorough and cheerful, which in itself is comforting.</p>
-                                    <span class="author">Mark Dave - Teacher</span>
-                                </div>
-
-                                <div>
-                                    <i class="icon2-bubble"></i>
-                                    <p>Medical Surgery in my opinion has to be one of the best in the area. I have never had a problem getting to see a doctor or getting through from the telephone. All the Doctors here are very good and very considerate
-                                        and more importantly very efficient .</p>
-                                    <span class="author">John Doe - Business Men</span>
-                                </div>
-
-                                <div>
-                                    <i class="icon2-bubble"></i>
-                                    <p>I'm simply extremely satisfied with the quality and level of care received from Medical Centre not only to myself, but also my children and an elderly relative. excellent work</p>
-                                    <span class="author">Jackina Doe - House Wife</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="space100"></div>
-            </div>
-        </div>
+        
         <!-- TESTIMONIALS -->
 
 
@@ -444,23 +372,11 @@
 
 
             <!-- ELEMENTS - CALL TO ACTION -->
-            <div class="cta-wrap">
-                <div class="container">
-                    <div class="col-md-12">
-                        <h1>Hurry up! and get <br> <u>Free</u> treatment for <span> first 50 person</span></h1>
-                        <p>Limited time offer for this month. No credit card required.</p>
-                        <a href="#home" class="page-scroll btn btn-primary">Make an Appointment</a>
-                    </div>
-                </div>
-            </div>
+           
         </section>
 
         <!-- GOOGLE MAP -->
-        <div class="google-map">
-            <div class="container-fluid no-padding">
-                <div id="map"></div>
-            </div>
-        </div>
+     
 
         <!-- CONTACT INFO -->
         <div id="contact-info">
@@ -469,28 +385,28 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="c-info">
                             <h5><b>Call Us</b></h5>
-                            <p>(080) 123 456 7890</p>
+                            <p>911</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-sm-6">
                         <div class="c-info">
                             <h5><b>Email</b></h5>
-                            <p><a href="#">care@domain.com</a></p>
+                            <p><a href="#">olsj@smartwems.com</a></p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-sm-6">
                         <div class="c-info">
                             <h5><b>Address</b></h5>
-                            <p>72, Wallstreet, NY 20110</p>
+                            <p>San Jose, Nueva Ecija</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-sm-6">
                         <div class="c-info">
                             <h5><b>WEBSITE</b></h5>
-                            <p><a href="#"> www.domain.com</a></p>
+                            <p><a href="#"> www.smartwems.com</a></p>
                         </div>
                     </div>
 
@@ -500,104 +416,12 @@
         </div>
 
         <!-- FOOTER -->
-        <footer class="footer2" id="footer2">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-md-3 footerP">
-                        <h5>RELATED LINKS</h5><ul>
-                        <li>
-                            <a href="#">
-                                <p>About Us</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <p>Why Buy With Us?</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <p>Our Team</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <p>Contact Us</p>
-                            </a>
-                        </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-3 footerP">
-                        <h5>OTHER LINKS</h5><ul>
-                        <li>
-                            <a href="#">
-                                <p>Register</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <p>Forum</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <p>Affiliate</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <p>FAQ</p>
-                            </a>
-                        </li></ul>
-                    </div>
-
-                    <div class="col-md-3 footerP">
-                        <h5>RELATED LINKS</h5><ul>
-                        <li>
-                            <a href="#">
-                                <p>About Us</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <p>Why Buy With Us?</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <p>Our Team</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <p>Contact Us</p>
-                            </a>
-                        </li></ul>
-                    </div>
-
-                    <div class="col-md-3 footerP">
-                        <h5>About Us</h5>
-                        <p>Mauris feugiat erat tellus.Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-                        <h5>Social</h5>
-                        <div class="footer-social">
-                            <a href="#" class="fa fa-facebook"></a>
-                            <a href="#" class="fa fa-twitter"></a>
-                            <a href="#" class="fa fa-dribbble"></a>
-                            <a href="#" class="fa fa-google-plus"></a>
-                             <a href="#" class="fa fa-linkedin"></a>
-                            <a href="#" class="fa fa-instagram"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+       
 
         <!-- COPYRIGHT -->
         <div class="footer-copy">
             <div class="container">
-                &copy; 2019. Medila. All rights reserved.
+                &copy; 2021.OLSJ. All rights reserved.
             </div>
         </div>
     </div>

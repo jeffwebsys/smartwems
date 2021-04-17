@@ -170,6 +170,8 @@ Route::group(['prefix' => 'supplyofficer', 'as' => 'supplyofficer.', 'middleware
 
 	Route::get('/assets', $controller.'@assets')->name('assets');
 	Route::post('/assets/report', $controller.'@assetsStore')->name('assetsStore');
+
+	Route::post('/print/report', $controller.'@printReport')->name('printReport');
 	
 });
 
