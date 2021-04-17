@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Database\Seeds\JeffAdminSeeder;
 
 class DatabaseSeeder extends Seeder
 {
