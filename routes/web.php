@@ -14,12 +14,12 @@ use App\Mail\WelcomeMail;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/email', function () {
+// Route::get('/email', function () {
 
-	Mail::to('darksil3nt17@gmail.com')->send(new WelcomeMail());
+// 	Mail::to('darksil3nt17@gmail.com')->send(new WelcomeMail());
 
-    return new WelcomeMail();
-});
+//     return new WelcomeMail();
+// });
 
 Route::get('/', function () {
     return view('welcome');
