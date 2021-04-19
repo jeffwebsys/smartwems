@@ -85,24 +85,22 @@
                         <div class="t-content">
                             <div class="t-uppercontent"> 
                                 <h5>Tickets</h5>
-                                @foreach($ticketLatest as $tix)
-                             
-                                <span class="">{{   date('F j, Y, g:i a', strtotime($tix->created_at)) }}</span>
-                               
+                                @foreach($ticketLatest as $tix)   
                             </div>
-                            <p><span>Latest</span> Ticket Log</p>
+                           
                             <div class="tags">
-                                <div class="badge badge-info">ID: {{ $tix->id }}</div>
-                                <div class="badge">{!! $tix->TicketStatus !!}</div>
-                                <div class="badge badge-success">{{ $tix->ticketuser->name }}</div>
-                                <div class="badge badge-warning">{{ $tix->eqticket->item_name }}</div>
+                                <p style="color: black">Logs ID: {{ $tix->id }}</p>
+                                <p style="color:red">Remarks: {{ $tix->description }}</p>
+                                <p>Time: {{ $tix->created_at }}</p>
+                                <p>Action Taken By: {{ $tix->logs }}</p>
                                 @endforeach
                             </div>
+                            {{ $ticketLatest->links() }}
                         </div>
                       
                     </div>
 
-                    <div class="item-timeline timeline-new">
+                    {{-- <div class="item-timeline timeline-new">
                         <div class="t-dot" data-original-title="" title="">
                             <div class="t-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
                         </div>
@@ -120,9 +118,9 @@
                                 @endforeach
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="item-timeline timeline-new">
+                    {{-- <div class="item-timeline timeline-new">
                         <div class="t-dot" data-original-title="" title="">
                             <div class="t-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
                         </div>
@@ -137,9 +135,9 @@
                                 <div class="badge badge-success">EOD</div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="item-timeline timeline-new">
+                    {{-- <div class="item-timeline timeline-new">
                         <div class="t-dot" data-original-title="" title="">
                             <div class="t-warning"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg></div>
                         </div>
@@ -154,13 +152,13 @@
                                 <div class="badge badge-warning">Docs</div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="item-timeline timeline-new">
+                    {{-- <div class="item-timeline timeline-new">
                         <div class="t-dot" data-original-title="" title="">
                             <div class="t-dark"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6" y2="6"></line><line x1="6" y1="18" x2="6" y2="18"></line></svg></div>
                         </div>
-                    </div>                                      
+                    </div>                                       --}}
                 </div>                                    
             <div class="ps__rail-x" style="left: 0px; bottom: -200px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 200px; height: 325px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 119px; height: 192px;"></div></div></div>
         </div>

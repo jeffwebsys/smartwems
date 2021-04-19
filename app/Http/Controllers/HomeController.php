@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Equipment;
 use App\User;
 use App\Ticket;
+use App\TicketHistory;
 use App\Notify;
 use App\PurchaseRequest;
 
@@ -33,7 +34,7 @@ class HomeController extends Controller
         $userAdmin = User::find(auth()->user()->id);
         $admin = User::role(1)->get();
         $ticket = Ticket::get();
-        $ticketLatest = Ticket::limit(1)->latest()->get();
+        $ticketLatest = TicketHistory::limit(4)->paginate(2);
         $ticketCompleted = Ticket::where('status', 3)->get();
         $ticketPending = Ticket::where('status', 2)->get();
         $maintenance = Notify::limit(2)->get();
