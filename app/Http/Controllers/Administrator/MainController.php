@@ -87,7 +87,7 @@ class MainController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('item_name', function ($data) {
-                    return '<a href="' . route('admin.equipmentView', $data->id) . '">' . $data->item_name . '</a>';
+                    return '<a href="' . route('admin.equipmentview', $data->id) . '">' . $data->item_name . '</a>';
                 })
                 ->addColumn('item_description', function ($data) {
                     return $data->item_description;

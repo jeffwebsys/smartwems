@@ -15,7 +15,7 @@ use App\EquipmentCategory;
 use App\EquipmentLocation;
 use App\Procurement;
 use App\PurchaseRequest;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use DataTables;
 use Response;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -55,7 +55,7 @@ class MainController extends Controller
                     return $data->equipmentStatus;
                 })
                 ->addColumn('qr_code', function ($data) {
-                    $qrcode = url("equipment/$data->id");
+                    $qrcode = url("staff/equipment/$data->id");
                     $qr = Qrcode::size(50)
                         ->backgroundColor(255, 0, 0, 25)
                         ->generate($qrcode);
@@ -180,7 +180,7 @@ class MainController extends Controller
     }
     public function printQr(Request $request)
     {
-        $url = url("equipmentview/$request->equipment_id");
+        $url = url("staff/equipmentview/$request->equipment_id");
         $equipment = Equipment::find($request->equipment_id);
         $qrcode = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate($url));
        
@@ -201,7 +201,7 @@ class MainController extends Controller
         $sl =  $request->sv_life;
         $sv =  $request->sv_value;
         $dv =  $request->d_value;
-        $url = url("equipmentview/$request->equipment_id");
+        $url = url("staff/equipmentview/$request->equipment_id");
         $equipment = Equipment::find($request->equipment_id);
         $qrcode = base64_encode(QrCode::format('svg')
             ->size(200)

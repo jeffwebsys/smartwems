@@ -41,7 +41,7 @@
                                                                         <label style="color: black;"><strong> Equipment QR Code </label></label><br>
                                                                         @php
                                                                         use SimpleSoftwareIO\QrCode\Facades\QrCode;
-                                                                        $qrcode = url("equipmentview/$equipment->id");
+                                                                        $qrcode = url("staff/equipmentview/$equipment->id");
                                                                         $qr = Qrcode::size(100)
                                                                         ->backgroundColor(255, 0, 0, 25)
                                                                         ->generate($qrcode);

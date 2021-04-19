@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
 use App\Equipment;
 use App\Ticket;
@@ -111,7 +111,7 @@ class MainController extends Controller
         $sl =  $request->sv_life;
         $sv =  $request->sv_value;
         $dv =  $request->d_value;
-        $url = url("equipmentview/$request->equipment_id");
+        $url = url("staff/equipmentview/$request->equipment_id");
         $equipment = Equipment::find($request->equipment_id);
         $qrcode = base64_encode(QrCode::format('svg')
             ->size(200)
