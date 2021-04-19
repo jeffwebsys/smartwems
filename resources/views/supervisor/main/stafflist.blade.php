@@ -81,7 +81,7 @@
                     
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                        <button type="submit" class="btn btn-primary" id="userSave">Save</button>
+                        <button type="submit" class="btn btn-primary" id="userSave">Assign</button>
                     </div>
                     
             </div>

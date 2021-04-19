@@ -81,6 +81,7 @@ Route::group(['prefix' => 'supervisor', 'as' => 'supervisor.', 'middleware' => [
 	Route::get('/notify', $controller.'@notify')->name('notify');
 
 	Route::post('/notfiy/store', $controller.'@notifyStore')->name('notify.store');
+	Route::post('/ticket/update', $controller.'@ticketUpdate')->name('notify.ticketUpdate');
 
 	Route::get('/assets', $controller.'@assets')->name('assets');
 	Route::post('/assets/report', $controller.'@assetsStore')->name('assetsStore');
@@ -115,6 +116,8 @@ Route::group(['prefix' => 'maintenancestaff', 'as' => 'maintenancestaff.', 'midd
 	Route::post('/procurement/store', $controller.'@procurementStore')->name('procurement.store');
 
 	Route::get('/inventory', $controller.'@inventory')->name('inventory');
+
+	Route::get('/history/{id}/view', $controller.'@history')->name('history');
 	
 });
 
@@ -144,6 +147,8 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['App\Http\
 
 	Route::get('/track', $controller.'@track')->name('track');
 	Route::post('/track/store', $controller.'@trackStore')->name('trackStore');
+
+	Route::get('/history/{id}/view', $controller.'@history')->name('history');
 });
 
 // Supply Officer

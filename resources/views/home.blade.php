@@ -2,7 +2,7 @@
 
 @section('content')
 @section('title','Dashboard')
-<div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+<div class="col-xl-{{ ($userAdmin->user_type == 1) ? '6' : '12' }} col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="widget widget-one">
         <div class="widget-heading">
             <h6 class="">Ticket Trends</h6>
@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-
+@if($userAdmin->user_type == 1)
 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="widget widget-one">
         <div class="widget-heading">
@@ -60,6 +60,7 @@
         </div>
     </div>
 </div>
+@endif
  
 
 
@@ -158,17 +159,6 @@
                     <div class="item-timeline timeline-new">
                         <div class="t-dot" data-original-title="" title="">
                             <div class="t-dark"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6" y2="6"></line><line x1="6" y1="18" x2="6" y2="18"></line></svg></div>
-                        </div>
-                        <div class="t-content">
-                            <div class="t-uppercontent">
-                                <h5>Reboot</h5>
-                                <span class="">06 Apr, 2020</span>
-                            </div>
-                            <p>Server rebooted successfully</p>
-                            <div class="tags">
-                                <div class="badge badge-warning">Reboot</div>
-                                <div class="badge badge-primary">Server</div>
-                            </div>
                         </div>
                     </div>                                      
                 </div>                                    

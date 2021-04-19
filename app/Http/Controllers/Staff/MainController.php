@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\User;
 use App\Notify;
 use App\Ticket;
+use App\TicketHistory;
 use App\Equipment;
 use App\EquipmentCategory;
 use App\EquipmentLocation;
@@ -69,7 +70,7 @@ class MainController extends Controller
                 //     return '<input type="checkbox" name="check[]" value="'.$data->id.'" id="check">';
                 // })
                 ->addColumn('id', function ($data) {
-                    return $data->id;
+                    return '<a href="' . route('staff.history', $data->id) . '">' . $data->id . '</a>';
                 })
                 ->addColumn('item_name', function ($data) {
                     return $data->eqticket->item_name;
@@ -122,6 +123,11 @@ class MainController extends Controller
         Equipment::where('id', $request->equipment_id)->update(['status' => 2]);
 
         return back()->with('message', 'Request Submitted Successfully.');
+    }
+    public function history($id)
+    {
+        $history = TicketHistory::where('ticket_id', $id)->latest()->paginate(4);
+        return view('staff.main.history',compact('history'));
     }
     public function printPdf(Request $request)
     {

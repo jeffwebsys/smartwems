@@ -41,9 +41,12 @@ class Ticket extends Model
         return $list[$this->status];
 
     }
-
     public function scopeReq($query, $value)
     {
         return $query->where('status', $value);
+    }
+    public function logs()
+    {
+        return $this->hasMany(TicketHistory::class);
     }
 }

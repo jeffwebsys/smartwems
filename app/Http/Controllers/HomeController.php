@@ -30,6 +30,7 @@ class HomeController extends Controller
     {
         $equipment = Equipment::get();
         $user = User::get();
+        $userAdmin = User::find(auth()->user()->id);
         $admin = User::role(1)->get();
         $ticket = Ticket::get();
         $ticketLatest = Ticket::limit(1)->latest()->get();
@@ -38,6 +39,6 @@ class HomeController extends Controller
         $maintenance = Notify::limit(2)->get();
         $purchase = PurchaseRequest::get();
         return view('home', compact('equipment','user','ticket','ticketCompleted','admin','ticketPending',
-        'ticketLatest','maintenance','purchase'));
+        'ticketLatest','maintenance','purchase','userAdmin'));
     }
 }

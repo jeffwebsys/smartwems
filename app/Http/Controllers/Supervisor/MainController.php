@@ -12,6 +12,7 @@ use PDF;
 use App\User;
 use App\Equipment;
 use App\Ticket;
+use App\TicketHistory;
 use App\UserTicket;
 use App\Notify;
 use DataTables;
@@ -65,6 +66,13 @@ class MainController extends Controller
         $ticket = Ticket::where('id', $request->ticket_id)->update(['status' => 1]);
         $equipment = Equipment::where('id', $request->equipment_id)->update(['status' => 3]);
 
+        $history = TicketHistory::create([
+            'ticket_id' => $request->ticket_id,
+            'description' => 'The ticket is now assigned to one of the maintenance team',
+            'status' => 'The ticket is now assigned',
+            'logs' => auth()->user()->name]
+        );
+
         return response()->json([$userTicket, $ticket, $equipment]);
     }
     public function notifyStore(Request $request)
@@ -72,8 +80,30 @@ class MainController extends Controller
         // dd($request->all());
         $ticket = Ticket::where('id', $request->ticket_id)->update(['status' => 3]);
         $equipment = Equipment::where('id', $request->equipment_id)->update(['status' => 5]);
+
+        $history = TicketHistory::create([
+            'ticket_id' => $request->ticket_id,
+            'description' => 'Supervisor has officially completed the ticket',
+            'status' => 'The ticket is now completed',
+            'logs' => auth()->user()->name]
+        );
       
         return back()->with('message','Ticket Completed');
+    }
+    public function ticketUpdate(Request $request)
+    {
+        // dd($request->all());
+        $ticket = Ticket::where('id', $request->ticket_update)->update(['status' => 2]);
+        $equipment = Equipment::where('id', $request->equipment_update)->update(['status' => 4]);
+
+        $history = TicketHistory::create([
+            'ticket_id' => $request->ticket_update,
+            'description' => 'Supervisor re-opened the ticket',
+            'status' => 'The ticket is re-opened',
+            'logs' => auth()->user()->name]
+        );
+      
+        return back()->with('message','Ticket Re-Opened');
     }
      public function printReport(Request $request)
     {

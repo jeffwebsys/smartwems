@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\UserTicket;
+use App\TicketHistory;
 use App\Equipment;
 use App\Ticket;
+use App\User;
 use App\Notify;
 use App\Procurement;
 use DataTables;
@@ -22,7 +24,8 @@ class MainController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('ticket_id', function ($data) {
-                    return $data->ticketOwner['id'];
+                    // return $data->ticketOwner['id'];
+                    return '<a href="' . route('maintenancestaff.history', $data->ticketOwner->id) . '">' . $data->id . '</a>';
                 })
                 ->addColumn('equip_id', function ($data) {
                     return $data->equipmentOwner->id;
@@ -70,6 +73,11 @@ class MainController extends Controller
 
         return view('maintenancestaff.main.pending')->with('data');
     }
+    public function history($id)
+    {
+        $history = TicketHistory::where('ticket_id', $id)->latest()->paginate(4);
+        return view('staff.main.history',compact('history'));
+    }
     public function getProcurement(Request $request)
     {
         $data = Procurement::where('user_id', auth()->user()->id);
@@ -89,6 +97,13 @@ class MainController extends Controller
         $ticket = Ticket::where('id', $request->ticket_id)->update(['status' => 2]);
         $equipment = Equipment::where('id', $request->equipment_id)->update(['status' => 4]);  
 
+        $history = TicketHistory::create([
+            'ticket_id' => $request->ticket_id,
+            'description' => 'Ticket Update: '.$request->remarks,
+            'status' => 'The ticket is now for approval',
+            'logs' => auth()->user()->name]
+        );
+
          return response()->json();
     }
       public function procurementStore(Request $request)
@@ -99,7 +114,12 @@ class MainController extends Controller
             ['user_id' => auth()->user()->id,
             'equipment_id' => $request->equipment_id
             ]);
-
+            $history = TicketHistory::create([
+                'ticket_id' => $request->ticket_id,
+                'description' => 'Procurement has been requested',
+                'status' => 'The ticket is now for approval',
+                'logs' => auth()->user()->name]
+            );
 
             return response()->json();
     }
