@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-use Barryvdh\DomPDF\Facade as PDF;
+use PDF;
 use App\User;
 use App\Equipment;
 use App\Ticket;
