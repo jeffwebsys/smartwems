@@ -15,7 +15,7 @@ use App\EquipmentCategory;
 use App\EquipmentLocation;
 use App\Procurement;
 use App\PurchaseRequest;
-use PDF;
+use \PDF;
 use DataTables;
 use Response;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
