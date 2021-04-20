@@ -169,7 +169,7 @@ class MainController extends Controller
         if ($purchase) {
         
             
-            $pdf = PDF::loadView('stub-form', compact('purchase'));
+            $pdf = \PDF::loadView('stub-form', compact('purchase'));
             return $pdf->stream(); 
 
         } else {
@@ -186,7 +186,7 @@ class MainController extends Controller
        
         if ($equipment) {
         
-            $pdf = PDF::loadView('equip-form', compact('equipment','qrcode'));
+            $pdf = \PDF::loadView('equip-form', compact('equipment','qrcode'));
             return $pdf->stream(); 
 
         } else {
@@ -208,7 +208,7 @@ class MainController extends Controller
             ->errorCorrection('H')
             ->generate($url));
         if ($equipment) {
-            $pdf = PDF::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
+            $pdf = \PDF::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
             return $pdf->stream(); 
         } else {
             return redirect()->route('home');
