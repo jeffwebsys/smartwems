@@ -115,7 +115,7 @@ class MainController extends Controller
     public function equipmentView($id)
     {
         $equipment = Equipment::findOrFail($id);
-        return view('administrator.main.equipmentview', compact('equipment'));
+        return view('administrator.main.equipmentinfo', compact('equipment'));
     }
 
     public function store(Request $request)
