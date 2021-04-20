@@ -118,7 +118,7 @@ class MainController extends Controller
             ->errorCorrection('H')
             ->generate($url));
         if ($equipment) {
-            $pdf = Barryvdh\DomPDF\Facade::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
+            $pdf = PDF::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
             return $pdf->stream(); 
         } else {
             return redirect()->route('home');
