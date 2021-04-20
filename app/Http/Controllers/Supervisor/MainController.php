@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-use \PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
 use App\Equipment;
 use App\Ticket;
@@ -118,7 +118,7 @@ class MainController extends Controller
             ->errorCorrection('H')
             ->generate($url));
         if ($equipment) {
-            $pdf = \PDF::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
+            $pdf = Barryvdh\DomPDF\Facade::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
             return $pdf->stream(); 
         } else {
             return redirect()->route('home');

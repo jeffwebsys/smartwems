@@ -8,14 +8,13 @@ use Illuminate\Support\Str;
 use App\Notifications\AddEquipment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-
+use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
 use App\Equipment;
 use App\EquipmentCategory;
 use App\EquipmentLocation;
 use App\Procurement;
 use App\PurchaseRequest;
-use \PDF;
 use DataTables;
 use Response;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -186,7 +185,7 @@ class MainController extends Controller
        
         if ($equipment) {
         
-            $pdf = \PDF::loadView('equip-form', compact('equipment','qrcode'));
+            $pdf = PDF::loadView('equip-form', compact('equipment','qrcode'));
             return $pdf->stream(); 
 
         } else {
@@ -208,7 +207,7 @@ class MainController extends Controller
             ->errorCorrection('H')
             ->generate($url));
         if ($equipment) {
-            $pdf = \PDF::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
+            $pdf = PDF::loadView('reports', compact('equipment','qrcode','ac','sl','dv','sv'));
             return $pdf->stream(); 
         } else {
             return redirect()->route('home');
