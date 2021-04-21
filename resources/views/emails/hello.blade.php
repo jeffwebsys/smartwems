@@ -1,7 +1,8 @@
 @component('mail::message')
-# Hello from JRS Development Team
+# Hello {{ auth()->user()->name }},
 
-Welcome to our cool application 
+Greetings! The system automatically recorded your request This is Your Ticket ID: {{ $ticket->id }} please keep this record for your reference.<br>
+Reason: {{ $reason }}
 {{-- @component('mail::button', ['url' => ''])
 Button Text
 @endcomponent --}}

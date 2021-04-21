@@ -16,6 +16,8 @@ use App\EquipmentLocation;
 use DataTables;
 use Response;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Mail\SendTicket;
+use Mail;
 
 class MainController extends Controller
 {
@@ -121,6 +123,8 @@ class MainController extends Controller
         );
 
         Equipment::where('id', $request->equipment_id)->update(['status' => 2]);
+        
+        Mail::to(auth()->user()->email)->send(new SendTicket($ticket));
 
         return back()->with('message', 'Request Submitted Successfully.');
     }
@@ -151,6 +155,8 @@ class MainController extends Controller
             ],
             ['staff_id' => auth()->user()->id, 'name' => 'Logged Ticket', 'reason' => $request->item4, 'status' => 0]
         );
+        // Send Email
+        Mail::to(auth()->user()->email)->send(new SendTicket($ticket));
 
         Equipment::where('id', $request->item2)->update(['status' => 2]);
     }

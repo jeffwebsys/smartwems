@@ -17,6 +17,9 @@ use App\UserTicket;
 use App\Notify;
 use DataTables;
 use Response;
+use App\Mail\AssignedTicket;
+use App\Mail\TicketAction;
+use Mail;
 
 class MainController extends Controller
 {
@@ -64,6 +67,8 @@ class MainController extends Controller
         ]);
         // when done assigned team - with pending status
         $ticket = Ticket::where('id', $request->ticket_id)->update(['status' => 1]);
+        $ticket2 = Ticket::find($request->ticket_id);
+        $userTicket2 = UserTicket::find($request->user_id);
         $equipment = Equipment::where('id', $request->equipment_id)->update(['status' => 3]);
 
         $history = TicketHistory::create([
@@ -72,6 +77,10 @@ class MainController extends Controller
             'status' => 'The ticket is now assigned',
             'logs' => auth()->user()->name]
         );
+        //email notification
+         
+        $res = Mail::to(auth()->user()->email)->send(new AssignedTicket($ticket2));
+        $res2 = Mail::to([$ticket2->ticketuser->email,$userTicket2->userTicket->email])->send(new TicketAction($ticket2,$userTicket2));
 
         return response()->json([$userTicket, $ticket, $equipment]);
     }

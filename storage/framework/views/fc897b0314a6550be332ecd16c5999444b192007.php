@@ -1,9 +1,7 @@
 <?php $__env->startComponent('mail::message'); ?>
 # Hello <?php echo e(auth()->user()->name); ?>,
 
-Greetings! The system automatically recorded your request This is Your Ticket ID: <?php echo e($ticket->id); ?> please keep this record for your reference.<br>
-Reason: <?php echo e($reason); ?>
-
+Greetings! Ticket ID: <?php echo e($ticket); ?> is successfully assigned to one of our maintenance staff <br> please keep this record for your reference.<br>
 
 
 Thanks,<br>
@@ -14,4 +12,4 @@ Thanks,<br>
 <?php unset($__componentOriginal2dab26517731ed1416679a121374450d5cff5e0d); ?>
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
-<?php /**PATH D:\xampp\htdocs\capstone2\resources\views/emails/hello.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\xampp\htdocs\capstone2\resources\views/emails/assign.blade.php ENDPATH**/ ?>

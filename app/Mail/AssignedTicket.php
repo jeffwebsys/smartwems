@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendTicket extends Mailable
+class AssignedTicket extends Mailable
 {
     use Queueable, SerializesModels;
-    public $ticket;
+    public $ticket2;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($ticket)
+    public function __construct($ticket2)
     {
         //
-        $this->ticket = $ticket;
+        $this->ticket2 = $ticket2;
     }
 
     /**
@@ -30,10 +30,10 @@ class SendTicket extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.hello')
-        ->with([
-            'ticket'     => $this->ticket->id, //this works without queue
-            'reason'     => $this->ticket->reason, //this works without queue
+      
+        return $this->markdown('emails.assign')->with([
+            'ticket' => $this->ticket2->id
         ]);
+
     }
 }
