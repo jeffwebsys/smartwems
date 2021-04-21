@@ -182,6 +182,8 @@ Route::group(['prefix' => 'supplyofficer', 'as' => 'supplyofficer.', 'middleware
 	Route::post('/assets/report', $controller.'@assetsStore')->name('assetsStore');
 
 	Route::post('/print/report', $controller.'@printReport')->name('printReport');
+
+	Route::get('f/{filename}', 'MediaController@supplyOfficer')->name('media.supplyofficer');
 	
 });
 

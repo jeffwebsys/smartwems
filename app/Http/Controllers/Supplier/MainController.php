@@ -172,11 +172,11 @@ class MainController extends Controller
                     if($data->files == NULL):
                     $filename = 'ntx.png';
                    
-                    return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
+                    return '<a href="' . route('supplier.media.supplier', $filename) . '"><img src="' . route('supplier.media.supplier', $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
 
                     else: 
                         $filename = $data->files['title'];
-                        return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
+                        return '<a href="' . route('supplier.media.supplier', $filename) . '"><img src="' . route('supplier.media.supplier', $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
                     endif;
                 })
                 ->rawColumns(['id', 'created_at', 'equip_name', 'request_origin', 'request_by', 'status', 'assign', 'file'])

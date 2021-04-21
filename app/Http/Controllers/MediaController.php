@@ -38,6 +38,16 @@ class MediaController extends Controller
 
         return $this->generateOutput($path);
     }
+    public function supplyOfficer($filename)
+    {
+        $path = storage_path('app/public/file/' . $filename);
+
+        if (!File::exists($path)) {
+            abort(404);
+        }
+
+        return $this->generateOutput($path);
+    }
     
 
     private function generateOutput($path)

@@ -120,13 +120,13 @@ class MainController extends Controller
                 })
                ->addColumn('assign', function ($data) {
                 if($data->files == NULL):
-                    $filename = 'ntx.jpg';
+                    $filename = 'ntx.png';
                    
-                    return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="No Attachment" width="50" height="50"/></img></a>';
+                    return '<a href="' . route('supplyofficer.media.supplyofficer', $filename) . '"><img src="' . route('supplyofficer.media.supplyofficer', $filename) . '" alt="No Attachment" width="50" height="50"/></img></a>';
 
                     else: 
                         $filename = $data->files['title'];
-                        return '<a href="' . url('storage/file/' . $filename) . '"><img src="' . url('storage/file/' . $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
+                        return '<a href="' . route('supplyofficer.media.supplyofficer', $filename) . '"><img src="' . route('supplyofficer.media.supplyofficer', $filename) . '" alt="item-01" width="50" height="50"/></img></a>';
                     endif;
             
                 })
