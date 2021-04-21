@@ -163,19 +163,19 @@
            
                       <!-- Supplier -->
                 @elseif(auth()->user()->user_type == 6)
-                 <li class="menu">
+                 {{-- <li class="menu">
                 <a href="{{ route('supplier.servicerequest') }}" {{ request()->routeIs('supplier.servicerequest') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
                         <span style="font-size: 12px;">View Service Request</span>
                     </div>
                 </a>
-            </li>
+            </li> --}}
             <li class="menu">
                 <a href="{{ route('supplier.procurement') }}" {{ request()->routeIs('supplier.procurement') ? 'data-active=true' : '' }} aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                        <span style="font-size: 12px;">View Procurement Request</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span style="font-size: 12px;">Procurements</span>
                     </div>
                 </a>
             </li>

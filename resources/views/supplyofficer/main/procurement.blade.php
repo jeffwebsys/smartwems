@@ -68,8 +68,9 @@
                          <option value="{{ $user->id }}">{{ $user->name }}</option>
                          @endforeach
                        
-                     </select>
-                           
+                     </select><br>
+                     <h3 style="font-size: 16px;"><strong>Report details:</strong> </h3>
+                     <textarea class="form-input" name="report" id="report" cols="29" rows="5" required></textarea> 
                         </div>
                     </div>
                   
@@ -337,13 +338,15 @@
                 //   add data
                 let procurement_id = $("#procurement_id").val();
                 let supplier_id = $("#supplier_id").val();
+                let report = $("#report").val();
                  
                 $(".submit").attr("disabled", true);
 
                 $.ajax({
                     data: { 
                         procurement_id: procurement_id, 
-                        supplier_id: supplier_id, 
+                        supplier_id: supplier_id,
+                        report, 
                     },
                     url: "{{ route('supplyofficer.procurement.store') }}",
                     type: "POST",

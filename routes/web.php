@@ -206,8 +206,12 @@ Route::group(['prefix' => 'supplier', 'as' => 'supplier.', 'middleware' => ['App
 	Route::get('/servicerequest/{id}/edit', $controller.'@edit')->name('servicerequest.edit');
 	Route::post('/servicerequest/store', $controller.'@store')->name('servicerequest.store');
 
+	Route::get('/supplyreport/{id}/log', $controller.'@supplyReport')->name('supplyReport');
+
 	Route::post('/file/store', $controller.'@fileStore')->name('file.store');
 
 	Route::get('f/{filename}', 'MediaController@supplierFile')->name('media.supplier');
+
+	Route::get('/history/{id}/view', $controller.'@history')->name('history');
 	
 });

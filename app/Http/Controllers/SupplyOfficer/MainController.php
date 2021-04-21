@@ -9,6 +9,7 @@ use App\Notifications\AddEquipment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use Barryvdh\DomPDF\Facade as PDF;
+use App\SupplierReport;
 use App\User;
 use App\Equipment;
 use App\EquipmentCategory;
@@ -272,7 +273,13 @@ class MainController extends Controller
     public function procurementStore(Request $request)
     {
      
-        $res = Procurement::where('id' ,$request->procurement_id)->update(['supplier_id' => $request->supplier_id]);
+        $res = Procurement::where('id' ,$request->procurement_id)
+                    ->update(['supplier_id' => $request->supplier_id]);
+
+        $report = SupplierReport::create([
+            'report' => $request->report,
+            'procurement_id' => $request->procurement_id
+        ]);
        
         return Response::json($res);
       

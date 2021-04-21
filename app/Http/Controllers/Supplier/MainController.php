@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\UserTicket;
+use App\SupplierReport;
+use App\TicketHistory;
 use App\Ticket;
 use DataTables;
 use App\Notify;
@@ -135,7 +137,7 @@ class MainController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('id', function ($data) {
-                    return $data->id;
+                    return '<a href="' . route('supplier.supplyReport', $data->id) . '">' . $data->id . '</a>';
                 })
                 ->addColumn('created_at', function ($data) {
                     $time = date('F j, Y, g:i a', strtotime($data->procurementTicket->created_at));
@@ -243,6 +245,16 @@ class MainController extends Controller
         }
 
         return view('maintenancestaff.main.inventory')->with('data');
+    }
+    public function supplyReport($id)
+    {
+        $supply = SupplierReport::where('procurement_id', $id)->latest()->paginate(4);
+        return view('supplier.main.supplierinfo',compact('supply'));
+    }
+    public function history($id)
+    {
+        $history = TicketHistory::where('ticket_id', $id)->latest()->paginate(4);
+        return view('supplier.main.history',compact('history'));
     }
     private function imageData()
     {
