@@ -79,8 +79,11 @@ class MainController extends Controller
         );
         //email notification
          
-        $res = Mail::to(auth()->user()->email)->send(new AssignedTicket($ticket2));
-        $res2 = Mail::to([$ticket2->ticketuser->email,$userTicket2->userTicket->email])->send(new TicketAction($ticket2,$userTicket2));
+        $res = Mail::to([auth()->user()->email,$ticket2->ticketuser->email])
+        ->cc(['darksil3nt17@gmail.com','lenzras@gmail.com'])
+        ->send(new AssignedTicket($ticket2));
+
+        // $res2 = Mail::to([$ticket2->ticketuser->email,$userTicket2->userTicket->email])->send(new TicketAction($ticket2,$userTicket2));
 
         return response()->json([$userTicket, $ticket, $equipment]);
     }

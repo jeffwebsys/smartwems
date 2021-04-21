@@ -1,5 +1,5 @@
 <?php $__env->startComponent('mail::message'); ?>
-# Hello <?php echo e(auth()->user()->name); ?>,
+# Hello,
 
 Greetings! Ticket ID: <?php echo e($ticket); ?> is successfully assigned to one of our maintenance staff <br> please keep this record for your reference.<br>
 

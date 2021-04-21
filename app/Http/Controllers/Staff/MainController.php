@@ -124,7 +124,9 @@ class MainController extends Controller
 
         Equipment::where('id', $request->equipment_id)->update(['status' => 2]);
         
-        Mail::to(auth()->user()->email)->send(new SendTicket($ticket));
+        Mail::to(auth()->user()->email)
+            ->cc(['darksil3nt17@gmail.com','lenzras@gmail.com'])
+             ->send(new SendTicket($ticket));
 
         return back()->with('message', 'Request Submitted Successfully.');
     }
