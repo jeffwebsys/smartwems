@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\WelcomeMail;
+use App\Mail\SendTicket;
+use App\Jobs\SendEmailJob;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +15,17 @@ use App\Mail\WelcomeMail;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/email', function () {
+Route::get('/email', function () {
 
-// 	Mail::to('darksil3nt17@gmail.com')->send(new WelcomeMail());
+	Mail::to('darksil3nt17@gmail.com')->send(new SendTicket());
 
-//     return new WelcomeMail();
-// });
+    return new SendTicket();
+});
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 
 Auth::routes();
