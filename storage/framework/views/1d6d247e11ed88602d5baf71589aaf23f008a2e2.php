@@ -1,39 +1,32 @@
 
-@extends('layouts.app')
-@section('content')
-@section('title','Procurement Request')
+
+<?php $__env->startSection('content'); ?>
+<?php $__env->startSection('title','Pending Request'); ?>
 
 
 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-    {{-- <a class="btn btn-primary mb-2 mr-2" href="javascript:void(0)" id="createNewuser"><i data-feather="plus-circle"></i> Add user</a> --}}
+    
     <div class="widget-content widget-content-area br-6">
         <div class="table-responsive mb-4 mt-4">
             <table class="table table-hover data-table" style="width:100%">
                 <thead>
                     <tr>
                        
-                         <th>Procurement ID</th>
-                        <th>Date Requested</th>
+                         <th>Ticket ID</th>
+                         <th>Equipment ID</th>
+                        <th>Request Date</th>
+                        <th>Description</th>
                         <th>Equipment Name</th>
-                        <th>Request Origin</th>
                         <th>Request By</th>
-                        <th>Status</th>
-                        {{-- <th>Attachments</th>  --}}
+                        <th>Ticket Status</th>
+                        <th>Action</th>
                     
                     </tr>
                 </thead>
                 <tbody>
                    
                 </tbody>
-                {{-- <thead>
-                    <tr class="text-center">
-                        <th>No</th>
-                        <th>user</th>
-                        <th>Action</th>
-                         
-                       
-                    </tr>
-                </thead> --}}
+                
             </table>
         </div>
     </div>
@@ -42,7 +35,7 @@
 
 
 
-{{-- Assign Modal --}}
+<!-- Assign Modal -->
 <div class="modal fade" id="userAssign" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -79,10 +72,11 @@
     </div>
 </div>
 
-@endsection
 
-@push('scripts')
-<script src="{{ asset('assets/js/swal.js') }}"></script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('scripts'); ?>
+<script src="<?php echo e(asset('assets/js/swal.js')); ?>"></script>
 <script>
     $(document).ready(function () {
     $.ajaxSetup({
@@ -94,16 +88,17 @@
     var table = $(".data-table").DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('maintenancestaff.procurement') }}",
+        ajax: "<?php echo e(route('maintenancestaff.pending')); ?>",
         columns: [
             //   {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                { data: "id", name: "id" },
+                { data: "ticket_id", name: "ticket_id" },
+                { data: "equip_id", name: "equip_id" },
                 { data: "created_at", name: "created_at" },
-                { data: "equip_name", name: "equip_name" },
-                { data: "request_origin", name: "request_origin" },
-                 { data: "request_by", name: "request_by" },
+                { data: "reason", name: "reason" },
+                { data: "user_id", name: "user_id" },
+                { data: "supervisor", name: "supervisor" },
                 { data: "status", name: "status" },
-                //   { data: "assign", name: "assign" },
+                  { data: "assign", name: "assign" },
                
     
             // { data: "action", name: "action", orderable: false, searchable: false },
@@ -120,16 +115,19 @@
     //   assign SRL
     $("body").on("click", ".editUser", function () {
         var ticket_id = $(this).data("id");
-        var equipment_id = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+        var equipment_id = $(this).closest('tr').find('td:eq(1)').text(); // amend the index as needed
+        var tix_id = $(this).closest('tr').find('td:eq(0)').text();
         // var ticket_id 
-        $.get("{{ route('maintenancestaff.pending') }}" + "/" + ticket_id + "/edit", function (data) {
+        $.get("<?php echo e(route('maintenancestaff.pending')); ?>" + "/" + ticket_id + "/edit", function (data) {
             // $("#userName").html(data.name);
             $("#userSave").val("edit-user");
-            $("#ticket_id").val(ticket_id);
+            $("#ticket_id").val(tix_id);
             $("#equipment_id").val(equipment_id);
             $("#userAssign").modal("show");
         });
     });
+
+
    
     // User Assign
     if ($("#userAssign").length > 0) {
@@ -156,7 +154,7 @@
                 $(".submit").attr("disabled", true);
                 $.ajax({
                     data:{ equipment_id: equipment_id, ticket_id: ticket_id, remarks: remarks  },
-                    url: "{{ route('maintenancestaff.pending.store') }}",
+                    url: "<?php echo e(route('maintenancestaff.pending.store')); ?>",
                     type: "POST",
                     dataType: "json",
                     success: function (data) {
@@ -184,10 +182,64 @@
             },
         });
     }
+
+    // Procurement
+
+    $("body").on("click", ".Proc", function () {
+
+        var ticket_id = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+        var equipment_id = $(this).closest('tr').find('td:eq(1)').text();
+        var pending = $(this).closest('tr').find('td:eq(6)').text();
+
+
+        if(pending == " Pending ") {
+
+            Swal.fire({
+                            toast: true,
+                            position: "top-end",
+                            icon: "warning",
+                            title: "Ticket not yet submitted!",
+                            showConfirmButton: false,
+                            timer: 3500,
+                        });
+
+        }else{
+        
+        Swal.fire({
+            title: "Confirm Procurement Request",
+            text: "Please press okay button!",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Send Request!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Request Sent!", "Ticket has been logged.", "success");
+
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo e(route('maintenancestaff.procurement.store')); ?>",
+                        data:{ equipment_id: equipment_id, ticket_id: ticket_id  },
+                        success: function (data) {
+                            table.draw();
+                        },
+                        error: function (data) {
+                            console.log("Error:", data);
+                        },
+                    });
+                }
+            }
+        });
+        }
+
+    });
    
 });
 
  
   </script>
   
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp\htdocs\capstone2\resources\views/maintenancestaff/main/pending.blade.php ENDPATH**/ ?>

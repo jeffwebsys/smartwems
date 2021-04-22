@@ -19,6 +19,7 @@ use DataTables;
 use Response;
 use App\Mail\AssignedTicket;
 use App\Mail\TicketAction;
+use App\Mail\TicketRequested;
 use Mail;
 
 class MainController extends Controller
@@ -99,6 +100,14 @@ class MainController extends Controller
             'status' => 'The ticket is now completed',
             'logs' => auth()->user()->name]
         );
+
+        $usersup = User::where('user_type', 2)->first();
+        $userstaff = User::where('user_type',4)->first();
+        $usermstaff = User::where('user_type',3)->first();
+
+        $res = Mail::to([auth()->user()->email,$usersup->email,$userstaff->email,$usermstaff->email])
+        ->cc(['darksil3nt17@gmail.com','lenzras@gmail.com'])
+        ->send(new TicketRequested($history));
       
         return back()->with('message','Ticket Completed');
     }
@@ -110,10 +119,18 @@ class MainController extends Controller
 
         $history = TicketHistory::create([
             'ticket_id' => $request->ticket_update,
-            'description' => 'Supervisor re-opened the ticket',
+            'description' => 'Supervisor has re-opened the ticket and available for ticket ammendments',
             'status' => 'The ticket is re-opened',
             'logs' => auth()->user()->name]
         );
+
+        $usersup = User::where('user_type', 2)->first();
+        $userstaff = User::where('user_type',4)->first();
+        $usermstaff = User::where('user_type',3)->first();
+
+        $res = Mail::to([auth()->user()->email,$usersup->email,$userstaff->email,$usermstaff->email])
+        ->cc(['darksil3nt17@gmail.com','lenzras@gmail.com'])
+        ->send(new TicketRequested($history));
       
         return back()->with('message','Ticket Re-Opened');
     }

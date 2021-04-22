@@ -14,6 +14,9 @@ use App\Notify;
 use App\Procurement;
 use DataTables;
 use Response;
+use App\Mail\TicketRequested;
+use Mail;
+use DB;
 
 class MainController extends Controller
 {
@@ -56,10 +59,10 @@ class MainController extends Controller
                         return  'Completed';
                     else:
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="Edit" class="editUser">
-                    <span class="badge outline-badge-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload-cloud"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg></span></a>';
+                    <span class="badge badge-warning" style="font-size: 10px;"> Update </span></a>';
                   
                      $btn = $btn. '<span style="margin-right: 10px;"></span><a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-original-title="EditProc" class="Proc">
-                     <span class="badge outline-badge-warning"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></span></a>';
+                     <span class="badge badge-warning" style="font-size: 10px;"> Proc. Request </span></a>';
                    
 
                     return $btn;
@@ -100,9 +103,16 @@ class MainController extends Controller
         $history = TicketHistory::create([
             'ticket_id' => $request->ticket_id,
             'description' => 'Ticket Update: '.$request->remarks,
-            'status' => 'The ticket is now for approval',
+            'status' => 'The ticket is now being viewed by supervisor',
             'logs' => auth()->user()->name]
         );
+       
+        $usersup = User::where('user_type', 2)->first();
+        $userstaff = User::where('user_type',4)->first();
+
+        $res = Mail::to([auth()->user()->email,$usersup->email,$userstaff->email])
+        ->cc(['darksil3nt17@gmail.com','lenzras@gmail.com'])
+        ->send(new TicketRequested($history));
 
          return response()->json();
     }
@@ -203,16 +213,16 @@ class MainController extends Controller
                 ->addColumn('status', function ($data) {
                     return $data->tixStatus;
                 })
-                ->addColumn('assign', function ($data) {
-                    if($data->attachment == NULL){
+                // ->addColumn('assign', function ($data) {
+                //     if($data->attachment == NULL){
 
-                        $ath = 'No Data';
-                    }
+                //         $ath = 'No Data';
+                //     }
 
-                   return $ath;
-                })
+                //    return $ath;
+                // })
 
-                ->rawColumns(['id', 'created_at', 'equip_name', 'request_origin', 'request_by', 'status' ,'assign'  ])
+                ->rawColumns(['id', 'created_at', 'equip_name', 'request_origin', 'request_by', 'status'])
                 ->make(true);
         }
 

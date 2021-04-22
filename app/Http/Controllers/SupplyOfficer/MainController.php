@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\SupplierReport;
 use App\User;
+use App\TicketHistory;
 use App\Equipment;
 use App\EquipmentCategory;
 use App\EquipmentLocation;
@@ -19,6 +20,9 @@ use App\PurchaseRequest;
 use DataTables;
 use Response;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Mail\TicketRequested;
+use App\Mail\SupplierReport as SupplierNotify;
+use Mail;
 
 class MainController extends Controller
 {
@@ -122,7 +126,7 @@ class MainController extends Controller
                 if($data->files == NULL):
                     $filename = 'ntx.png';
                    
-                    return '<a href="' . route('supplyofficer.media.supplyofficer', $filename) . '"><img src="' . route('supplyofficer.media.supplyofficer', $filename) . '" alt="No Attachment" width="50" height="50"/></img></a>';
+                    return 'No Attachments';
 
                     else: 
                         $filename = $data->files['title'];
@@ -280,6 +284,15 @@ class MainController extends Controller
             'report' => $request->report,
             'procurement_id' => $request->procurement_id
         ]);
+
+        // $usersup = User::where('user_type', 2)->first();
+        // $userstaff = User::where('user_type',4)->first();
+        // $usermstaff = User::where('user_type',3)->first();
+        $usersupplier = User::where('id',$request->supplier_id)->first();
+
+        $mail = Mail::to([auth()->user()->email , $usersupplier->email])
+        ->cc(['darksil3nt17@gmail.com','lenzras@gmail.com'])
+        ->send(new SupplierNotify($report));
        
         return Response::json($res);
       
